@@ -1,11 +1,23 @@
-# Welcome to your Jupyter Book
+# Машинное обучение
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+Здесьь будут находиться материалы по курсу "Машинное обучение" для студентов факультета космических исследований МГУ им. М.В. Ломоносова
+Материалы к лекциям будут доступны онлайн. 
 
-Check out the content pages bundled with this sample book to see more.
+## Курс лекций содержит 12 лекций, 12 семинаров и 6 домашних работ
+
+1. Вводная лекция
+2. Метод k-средних 
+3. Дерево решений 
+4. Линейная регрессия SGD
+5. Метод опорных векторов SVM
+6. MSE, Логистическая регрессия
+7. Временные ряды
+8. Анализ текста
+9. Классификация по Байесу
+10. Ранжирование
+11. Ансамблирование
+
+
 
 ```{tableofcontents}
 ```
