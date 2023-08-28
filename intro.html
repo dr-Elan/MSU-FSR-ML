@@ -64,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="INTRO" href="Regression.html" />
+    <link rel="next" title="Stochastic Gradient Descent (SGD)" href="Regression.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -156,12 +156,16 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Regression.html">INTRO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regression.html">Stochastic Gradient Descent (SGD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regression_seminar.html">SGD</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mymarkdownfile.html">Here’s my sample title</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="logistic_seminar.html">Log-Reg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SVM_seminar.html">SVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KNN_seminar.html">KNN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decision_trees_seminar.html">DT</a></li>
+
 </ul>
 
     </div>
@@ -369,30 +373,74 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Машинное обучение<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<p>Здесьь будут находиться материалы по курсу “Машинное обучение” для студентов факультета космических исследований МГУ им. М.В. Ломоносова
+<p>Здесь будут находиться материалы по курсу “Машинное обучение” для студентов факультета космических исследований МГУ им. М.В. Ломоносова
 Материалы к лекциям будут доступны онлайн.</p>
 <section id="id2">
 <h2>Курс лекций содержит 12 лекций, 12 семинаров и 6 домашних работ<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Регрессия SGD</p></li>
-<li><p>Логистическая регрессия MSE</p></li>
-<li><p>Метод опорных векторов SVM</p></li>
-<li><p>Метод k-средних KNN</p></li>
-<li><p>Дерево решений</p></li>
-<li><p>Точность и переобучение</p></li>
-<li><p>Классификация по Байесу</p></li>
-<li><p>Кластеризация</p></li>
+<li><p>Регрессия SGD</p>
+<ul class="simple">
+<li><p>[лекция]</p></li>
+<li><p><a class="reference internal" href="regression_seminar.html"><span class="doc std std-doc">семинар</span></a></p></li>
+</ul>
+</li>
+<li><p>Логистическая регрессия MSE</p>
+<ul class="simple">
+<li><p>[лекция]</p></li>
+<li><p><a class="reference internal" href="logistic_seminar.html"><span class="doc std std-doc">семинар</span></a></p></li>
+</ul>
+</li>
+<li><p>Метод опорных векторов SVM</p>
+<ul class="simple">
+<li><p>[лекция]</p></li>
+<li><p><a class="reference internal" href="SVM_seminar.html"><span class="doc std std-doc">семинар</span></a></p></li>
+</ul>
+</li>
+<li><p>Метод k-средних KNN</p>
+<ul class="simple">
+<li><p>[лекция]</p></li>
+<li><p><a class="reference internal" href="KNN_seminar.html"><span class="doc std std-doc">семинар</span></a></p></li>
+</ul>
+</li>
+<li><p>Дерево решений</p>
+<ul class="simple">
+<li><p>лекция</p></li>
+<li><p><a class="reference internal" href="decision_trees_seminar.html"><span class="doc std std-doc">семинар</span></a></p></li>
+</ul>
+</li>
+<li><p>Кластеризация</p>
+<ul class="simple">
+<li><p>лекция</p></li>
+<li><p>семинар</p></li>
+</ul>
+</li>
+<li><p>Точность и переобучение</p>
+<ul class="simple">
+<li><p>лекция</p></li>
+<li><p>семинар</p></li>
+</ul>
+</li>
+<li><p>Классификация по Байесу</p>
+<ul class="simple">
+<li><p>лекция</p></li>
+<li><p>семинар</p></li>
+</ul>
+</li>
 <li><p>Feature Selection</p></li>
 <li><p>Ансамблирование</p></li>
 </ol>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Regression.html">INTRO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Regression.html#id1">Регрессия</a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mymarkdownfile.html">Here’s my sample title</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regression.html">Stochastic Gradient Descent (SGD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regression_seminar.html">SGD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regression_seminar.html#id1">Инструменты</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regression_seminar.html#id3">Загрузка данных и работа с ними</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regression_seminar.html#id4">Линейная регрессия</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logistic_seminar.html">Log-Reg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SVM_seminar.html">SVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KNN_seminar.html">KNN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decision_trees_seminar.html">DT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decision_trees_seminar.html#decision-tree-regressor">Задание 1. Decision Tree Regressor</a></li>
 </ul>
 </div>
 </section>
@@ -434,7 +482,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">INTRO</p>
+        <p class="prev-next-title">Stochastic Gradient Descent (SGD)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
