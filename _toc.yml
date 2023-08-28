@@ -10,7 +10,3 @@ chapters:
 - file: SVM_seminar 
 - file: KNN_seminar 
 - file: decision_trees_seminar  
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
-- file: mymarkdownfile
