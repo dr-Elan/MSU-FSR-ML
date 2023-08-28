@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>INTRO &#8212; FSR. Machine learning.</title>
+    <title>Stochastic Gradient Descent (SGD) &#8212; FSR. Machine learning.</title>
   
   
   
@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Regression';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Markdown Files" href="markdown.html" />
+    <link rel="next" title="SGD" href="regression_seminar.html" />
     <link rel="prev" title="Машинное обучение" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -159,7 +159,15 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">INTRO</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Stochastic Gradient Descent (SGD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regression_seminar.html">SGD</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="logistic_seminar.html">Log-Reg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SVM_seminar.html">SVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KNN_seminar.html">KNN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decision_trees_seminar.html">DT</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
@@ -348,7 +356,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>INTRO</h1>
+    <h1>Stochastic Gradient Descent (SGD)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -358,18 +366,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">INTRO</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Регрессия</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-ml">Искусственный интелект (AI) и машинное обучение (ML) системы, которые влияют на всех нас, большинство из нас пользуются ими каждый день. Они генерируют для нас ленту новостей, которые мы читаем, музыку, которую мы слушаем, помогают в принятии решение крупным компаниям и правительствам, что мы покупаем, смотрим и слушаем.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Линейная регрессия</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Метод максимального правдоподобия</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Линейная регрессия</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Метод максимального правдоподобия</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><strong>Дополнительные материалы:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Дополнительные материалы:</strong></a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -380,11 +383,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="intro">
-<h1>INTRO<a class="headerlink" href="#intro" title="Permalink to this heading">#</a></h1>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>Регрессия<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="stochastic-gradient-descent-sgd">
+<h1>Stochastic Gradient Descent (SGD)<a class="headerlink" href="#stochastic-gradient-descent-sgd" title="Permalink to this heading">#</a></h1>
 <section id="ai-ml">
 <h2>Искусственный интелект (AI) и машинное обучение (ML) системы, которые влияют на всех нас, большинство из нас пользуются ими каждый день. Они генерируют для нас ленту новостей, которые мы читаем, музыку, которую мы слушаем, помогают в принятии решение крупным компаниям и правительствам, что мы покупаем, смотрим и слушаем.<a class="headerlink" href="#ai-ml" title="Permalink to this heading">#</a></h2>
 <p><strong>Машинное обучение — использование специальных алгоритмов самостоятельного нахождения решений различных задач путём комплексного использования статисческих данных, из которых выводятся закономерности и на основе которых делаются прогнозы.</strong></p>
@@ -406,12 +406,12 @@ document.write(`
 </div><h1><u>План лекциика</u></h1>
 <p><font size="3" face="Arial">
 <ul type="square"><li><a href="#1">Линейная регрессия.</a><ul><li><a href="#2">Метод максимального правдоподобия.</a><a href="#3"></p></section>
-<section id="id2">
-<h2>Линейная регрессия<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<section id="id1">
+<h2>Линейная регрессия<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <p id="1">Сегодня мы детально обсудим очень важный класс моделей машинного обучения – линейных. На данный момент развития машинного обучения и искусственного интелекта в целом можно строить довольно сложные модели, нейросети, но практически везде в основе лежат линейные модели. Они имеют большое кол-во преимуществ, например, такие как относительная простота вычислений и интепретация результатов, эффективность для описания многих процессов. Линейные модели используются в прогнозе цен, построении вероятностных моделей в кредитном скоринге, трейдинге, и т.д. </p>
 <p>Линейные модели описываются довольно простым линейным уравнением, где <span class="math notranslate nohighlight">\(y\)</span> - целевая переменная, <span class="math notranslate nohighlight">\(w\)</span> - вектор весов модели, <span class="math notranslate nohighlight">\(X\)</span> - матрица наблюдений,  а <span class="math notranslate nohighlight">\(e\)</span> - ошибка.$<span class="math notranslate nohighlight">\(y_i = \sum\limits^{m}_{j=1}w_j X_{ij} + e_i\)</span>$</p>
-<p style="align: center;"><img align=center src="https://wiki.loginom.ru/images/linear-regression.svg"  width=900></p><section id="id3">
-<h3>Метод максимального правдоподобия<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p style="align: center;"><img align=center src="https://wiki.loginom.ru/images/linear-regression.svg"  width=900></p><section id="id2">
+<h3>Метод максимального правдоподобия<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
 <p id="2">Если процесс описывается с помощью линеной модели, то необходимо определить параметры $\alpha$ модели, для максимально эффективной точности. На языке математики это означает, что нужно задать вероятность $$p(y|x,\alpha)$$ того, что модель с параметрами $\alpha$ и входными данными $x$ будет максимальной.</p>
 Введем функцию правдоподобия, от которой нужно потребовать, чтобы произведение вероятностей по всем возможным $x$ с параметрами $\alpha$ было максимально.
 $$W(\alpha) = \prod\limits_{i}p(x_i, \alpha)$$
@@ -425,8 +425,8 @@ $$W(\alpha) = \prod\limits_{i}p(x_i, \alpha)$$
 <b><li>Постоянная изменчивость остатков. Гомоскедастиность.</li></b>Если у данных есть четко выраженная постоянная изменичивость остатков на каком-то отрезке и нет случайности нормального распределения, то такие данные не будут эффективно описаны линейной регрессией. Пример гетероскедастичной последовательности:<p style="align: center;"><img align=center src="https://sun9-63.userapi.com/impg/W0twTR05RqqKhI1XjSm0dbgca0xSN2EnYZuQWQ/b1vaIVmtPEc.jpg?size=1207x400&quality=96&proxy=1&sign=3d6565dcf115e6c67a440ba0b7a6294f&type=album"  width=900></p><p style="align: center;"><img align=center src="https://sun9-50.userapi.com/impg/cwkPmjSk4m7SuvcJ-Ak6M-uKKlduPMOpjq3xUQ/z84UDGD2-l0.jpg?size=1207x280&quality=96&proxy=1&sign=0bf8df49169982f351ad37df7a9c5bd8&type=album"  width=900></p></ol><h2>Summary</h2>
 <ol><li>Линейная регрессия лежит в основе многих сложных моделей, она позволяет очень эффективно предсказываать <b>общий тренд</b> данных, но также имеет и довольно <b>большие ограничения</b> на исследуемый датасет.</li><li>Полиномиальная регрессия умеет описывать <b>более сложные кривые</b> данных, которые не может описать линейная. <b>В зависимости от степени</b> полином будет описывать все точнее и точнее рассматриваемые данные, но не стоит забывать про <b>переобучение</b>.</li></ol></section>
 </section>
-<section id="id4">
-<h2><strong>Дополнительные материалы:</strong><a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<section id="id3">
+<h2><strong>Дополнительные материалы:</strong><a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Виды машинных обучений. Обучение с учителем, без и с подкреплением <a class="reference external" href="https://youtu.be/ku2oPMPht2I">https://youtu.be/ku2oPMPht2I</a></p></li>
 <li><p>Устройство проекта в машинном обучении <a class="reference external" href="https://youtu.be/LXc6gjip_oM">https://youtu.be/LXc6gjip_oM</a></p></li>
@@ -480,11 +480,11 @@ $$W(\alpha) = \prod\limits_{i}p(x_i, \alpha)$$
       </div>
     </a>
     <a class="right-next"
-       href="markdown.html"
+       href="regression_seminar.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Markdown Files</p>
+        <p class="prev-next-title">SGD</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -506,18 +506,13 @@ $$W(\alpha) = \prod\limits_{i}p(x_i, \alpha)$$
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">INTRO</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Регрессия</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-ml">Искусственный интелект (AI) и машинное обучение (ML) системы, которые влияют на всех нас, большинство из нас пользуются ими каждый день. Они генерируют для нас ленту новостей, которые мы читаем, музыку, которую мы слушаем, помогают в принятии решение крупным компаниям и правительствам, что мы покупаем, смотрим и слушаем.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Линейная регрессия</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Метод максимального правдоподобия</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Линейная регрессия</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Метод максимального правдоподобия</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><strong>Дополнительные материалы:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Дополнительные материалы:</strong></a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>

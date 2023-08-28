@@ -5,6 +5,11 @@ format: jb-book
 root: intro
 chapters:
 - file: Regression
+- file: regression_seminar
+- file: logistic_seminar 
+- file: SVM_seminar 
+- file: KNN_seminar 
+- file: decision_trees_seminar  
 - file: markdown
 - file: notebooks
 - file: markdown-notebooks
