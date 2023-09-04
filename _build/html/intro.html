@@ -64,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Stochastic Gradient Descent (SGD)" href="Regression.html" />
+    <link rel="next" title="Linear Model (LM)" href="Regression.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -156,7 +156,18 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Regression.html">Stochastic Gradient Descent (SGD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regression.html">Linear Model (LM)</a></li>
+
+
+
+
+
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="regression_seminar.html">SGD</a></li>
 
 
@@ -378,9 +389,10 @@ document.write(`
 <section id="id2">
 <h2>Курс лекций содержит 12 лекций, 12 семинаров и 6 домашних работ<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Регрессия SGD</p>
+<li><p>Регрессия</p>
 <ul class="simple">
-<li><p>[лекция]</p></li>
+<li><p><a class="reference internal" href="MLA.html"><span class="doc std std-doc">ML</span></a></p></li>
+<li><p><a class="reference internal" href="Regression.html"><span class="doc std std-doc">лекция</span></a></p></li>
 <li><p><a class="reference internal" href="regression_seminar.html"><span class="doc std std-doc">семинар</span></a></p></li>
 </ul>
 </li>
@@ -431,7 +443,18 @@ document.write(`
 </ol>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Regression.html">Stochastic Gradient Descent (SGD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regression.html">Linear Model (LM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regression.html#id2">Обучение алгоритма/модели машинного обучения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regression.html#id4">Линейная регрессия</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regression.html#p-y-i-x-vec-w-sum-limits-j-1-m-w-j-x-ij-mathbf-n-0-sigma-2-mathbf-n-sum-limits-j-1-m-w-j-x-ij-sigma-2">$<span class="math notranslate nohighlight">\(p(y_i| X, \vec w = \sum\limits_{j=1}^{m}w_j X_{ij} + \mathbf N (0, \sigma^2) = \mathbf N ( \sum\limits_{j=1}^{m} w_j X_{ij}, \sigma^2 ) \)</span>$</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regression.html#log-p-vec-y-x-vec-w-frac-n-2-log-2-pi-sigma-2-frac-1-2-sigma-2-sum-limits-i-1-n-big-y-i-vec-w-t-vec-x-i-big-2">$<span class="math notranslate nohighlight">\( \log p ( \vec y | X, \vec w  ) = -\frac{n}{2} \log 2 \pi \sigma^2 - \frac{1}{2 \sigma^2} \sum\limits_{i=1}^{n} \big( y_i - \vec w ^{T} \vec x_i \big)^2 \)</span>$</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regression.html#id5">Функция потерь</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regression.html#mathbf-l-x-vec-y-vec-w-frac-1-2-sigma-2-big-y-i-vec-w-t-vec-x-i-big-2">$<span class="math notranslate nohighlight">\( \mathbf L (X, \vec y, \vec w ) = \frac{1}{2\sigma^2} \big( y_i - \vec w^{T} \vec x_i \big)^2  .\)</span>$</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regression.html#f-x-sum-limits-i-1-n-sum-limits-j-1-m-w-i-x-i-j-b">$<span class="math notranslate nohighlight">\( f(X) = \sum\limits_{i=1}^{n} \sum\limits_{j=1}^{m} w_i x_i^j + b \)</span>$</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regression.html#f-x-sum-limits-i-1-n-w-i-ln-x-i-b">$<span class="math notranslate nohighlight">\( f(X) = \sum\limits_{i=1}^{n}  w_i \ln( x_i) + b \)</span>$</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regression.html#f-x-sum-limits-i-1-n-e-w-i-x-i-b">$<span class="math notranslate nohighlight">\( f(X) = \sum\limits_{i=1}^{n} e^ {w_i x_i} + b \)</span>$</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regression.html#f-x-sum-limits-i-1-n-cdot-frac-1-x-b">$<span class="math notranslate nohighlight">\( f(X) = \sum\limits_{i=1}^{n} \cdot \frac{1}{x} + b \)</span>$</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regression.html#id11">Практика</a></li>
 <li class="toctree-l1"><a class="reference internal" href="regression_seminar.html">SGD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="regression_seminar.html#id1">Инструменты</a></li>
 <li class="toctree-l1"><a class="reference internal" href="regression_seminar.html#id3">Загрузка данных и работа с ними</a></li>
@@ -482,7 +505,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Stochastic Gradient Descent (SGD)</p>
+        <p class="prev-next-title">Linear Model (LM)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

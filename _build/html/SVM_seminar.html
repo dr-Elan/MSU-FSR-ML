@@ -159,7 +159,18 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Regression.html">Stochastic Gradient Descent (SGD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regression.html">Linear Model (LM)</a></li>
+
+
+
+
+
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="regression_seminar.html">SGD</a></li>
 
 
@@ -169,10 +180,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="KNN_seminar.html">KNN</a></li>
 <li class="toctree-l1"><a class="reference internal" href="decision_trees_seminar.html">DT</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mymarkdownfile.html">Here’s my sample title</a></li>
 </ul>
 
     </div>
@@ -845,7 +852,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f7b59d689a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7fb44321dc70&gt;
 </pre></div>
 </div>
 <img alt="_images/d69c5c418b299a0a3371a22846139fe735a5ac900723ac72275a948a7c259f91.png" src="_images/d69c5c418b299a0a3371a22846139fe735a5ac900723ac72275a948a7c259f91.png" />
@@ -1081,11 +1088,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2 2 1 2 2 2 2 1 1 1 2 1 2 2 1 2 2 2 2 2 2 1 2 1 2 1 2 2 1 1 1 2 2 2 1 1 2
- 2 2 1 1 2 2 2 2 2 2 1 1 2 1 2 2 2 2 1 1 2 2 1 2 2 2 2 1 2 1 2 2 1 1 1 2 2
- 2 1 2 2 2 2 1 1 2 2 2 1 2 2 2 1 2 1 1 2 1 2 2 1 2 1 1 2 2 2 2 2 1 2 2 1 2
- 2 1 2 2 2 1 2 1 2 1 1 1 2 1 2 1 2 2 2 2 2 2 2 1 2 2 2 2 2 1 2 2 2 2 2 1 1
- 1 2 2 2 2 1 2 1 1 2 2 2 1 2 1 1 1 2 1 2 2 1 2]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2 1 2 1 1 1 2 2 1 2 2 1 1 2 1 2 2 1 1 2 1 2 2 2 2 1 2 2 1 2 1 2 1 1 2 2 1
+ 2 2 1 1 2 1 2 2 1 2 1 2 1 2 1 2 2 2 2 2 2 1 2 2 2 1 2 1 1 2 2 2 2 2 2 1 2
+ 2 2 2 1 2 1 1 1 2 2 2 2 2 2 2 2 2 1 2 1 1 2 1 2 2 1 2 2 1 1 2 2 2 2 1 1 2
+ 2 1 1 2 1 1 2 2 2 2 1 1 2 2 2 2 2 2 1 1 2 1 2 2 1 2 2 1 2 2 2 1 1 1 2 2 2
+ 1 1 2 1 2 2 2 1 1 2 2 2 2 2 2 1 1 2 1 1 2 2 2]
 </pre></div>
 </div>
 </div>
@@ -1111,9 +1118,9 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Confusion Matrix
 [[ 61   4]
- [  1 105]]
+ [  4 102]]
 Test Set: 171
-Accuracy = 97.07602339181285 %
+Accuracy = 95.32163742690058 %
 </pre></div>
 </div>
 </div>
@@ -1154,7 +1161,7 @@ Accuracy = 97.07602339181285 %
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cc141670f55c870f0ef768f0bbaddc1bfa4d0a81e390dabb6468da3c18d77b78.png" src="_images/cc141670f55c870f0ef768f0bbaddc1bfa4d0a81e390dabb6468da3c18d77b78.png" />
+<img alt="_images/d992c1a69be25ef481adadd65fd8e5657bdc9678777422fc805890c3c8e5b839.png" src="_images/d992c1a69be25ef481adadd65fd8e5657bdc9678777422fc805890c3c8e5b839.png" />
 </div>
 </div>
 <p>Соответственно, мы не можем найти такое пороговое значение, которое будет разделять наши классы на больных и здоровых, а, следовательно, и Support Vector Classifier работать тоже не будет.  Для начала давайте преобразуем наши данные таким образом, чтобы они стали 2-хмерными. В качестве значений по оси Y будем использовать дозу, возведенную в квадрат (<strong>доза</strong><span class="math notranslate nohighlight">\(^2\)</span>).</p>
@@ -1181,7 +1188,7 @@ Accuracy = 97.07602339181285 %
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/03be587fe31d913e2d2913db0f891aaf0922c416bbf4dd1cf90652da40669871.png" src="_images/03be587fe31d913e2d2913db0f891aaf0922c416bbf4dd1cf90652da40669871.png" />
+<img alt="_images/71a31449a3b29b71b957dac37b3fde00263efc11b96f0919f46c6a77837a5275.png" src="_images/71a31449a3b29b71b957dac37b3fde00263efc11b96f0919f46c6a77837a5275.png" />
 </div>
 </div>
 <p>Теперь мы можем вновь использовать Support Vector Classifier для классификации</p>
@@ -1207,7 +1214,7 @@ Accuracy = 97.07602339181285 %
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f29cd4966e144a30009966b4e796ad97509a622b8319760758052bc001637ab1.png" src="_images/f29cd4966e144a30009966b4e796ad97509a622b8319760758052bc001637ab1.png" />
+<img alt="_images/fef415b23684f17a70658cf416a182965a02ab47a7194d87f2413f233f254b79.png" src="_images/fef415b23684f17a70658cf416a182965a02ab47a7194d87f2413f233f254b79.png" />
 </div>
 </div>
 <p>Но тут возникает резонный вопрос: почему мы решили возвести в квадрат? Почему не в куб? Или, наоборот, не извлечь корень? Как нам решить, какое преобразование использовать?</p>

@@ -159,7 +159,18 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Regression.html">Stochastic Gradient Descent (SGD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regression.html">Linear Model (LM)</a></li>
+
+
+
+
+
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="regression_seminar.html">SGD</a></li>
 
 
@@ -169,10 +180,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="KNN_seminar.html">KNN</a></li>
 <li class="toctree-l1"><a class="reference internal" href="decision_trees_seminar.html">DT</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mymarkdownfile.html">Here’s my sample title</a></li>
 </ul>
 
     </div>
@@ -445,7 +452,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b45df0dab72f40c58d30f921222dc8b211ff311e19b7c0cdc2ee5fa43c48c8fd.png" src="_images/b45df0dab72f40c58d30f921222dc8b211ff311e19b7c0cdc2ee5fa43c48c8fd.png" />
+<img alt="_images/a879ba37d8cfedd3339d344547adba2e9039939a75640cc7b29eb519755599bd.png" src="_images/a879ba37d8cfedd3339d344547adba2e9039939a75640cc7b29eb519755599bd.png" />
 </div>
 </div>
 <p>Теперь, пользуясь нашим простым критерием, попробуем классифицировать каких-то новых мышей.</p>
@@ -470,7 +477,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/443a8b0e39a27e013eec0e1db7216f442b4e2a50df7a9735f80810d5da28d39e.png" src="_images/443a8b0e39a27e013eec0e1db7216f442b4e2a50df7a9735f80810d5da28d39e.png" />
+<img alt="_images/f8d4051769a209686ed89ac273563de0c4d2b2705456d5c72e238b96d81587c1.png" src="_images/f8d4051769a209686ed89ac273563de0c4d2b2705456d5c72e238b96d81587c1.png" />
 </div>
 </div>
 <p>Но что если наши мыши находятся тут?</p>
@@ -487,7 +494,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/859efce94a252526d405157b0407b5e2a6f895d4b80bcb926fe79769fbb424e7.png" src="_images/859efce94a252526d405157b0407b5e2a6f895d4b80bcb926fe79769fbb424e7.png" />
+<img alt="_images/b5b71a0415f3ee8a650080d86f938cf49024345fa7d5996224537e56b14f158b.png" src="_images/b5b71a0415f3ee8a650080d86f938cf49024345fa7d5996224537e56b14f158b.png" />
 </div>
 </div>
 <p>С точки зрения нашего классификатора, все просто: больше порогового значения — толстые мыши, меньше — нормальные. Но, с точки зрения здравого смысла, логичнее было бы классифицировать обоих мышей как нормальных, так как они значительно ближе к нормальным, чем к ожиревшим.</p>
@@ -516,7 +523,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/fcce30cbafd8cff598ef5c3d396b0331048719c92e2211d67f2c6517cfa912bf.png" src="_images/fcce30cbafd8cff598ef5c3d396b0331048719c92e2211d67f2c6517cfa912bf.png" />
+<img alt="_images/9393aac3f12d1c4d61764e3d50b89974666c9240d5d07f66eff399f086626f56.png" src="_images/9393aac3f12d1c4d61764e3d50b89974666c9240d5d07f66eff399f086626f56.png" />
 </div>
 </div>
 <p>Мы можем посчитать, насколько наша мышь близка к тому, чтобы оказаться в другом классе. Такое расстояние называется <strong>margin</strong>. И оно считается как <span class="math notranslate nohighlight">\(\mathrm{margin} = |\mathrm{threshold} - \mathrm{observation}|\)</span></p>
@@ -528,7 +535,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.90685619 0.59314381]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.24098669 0.25901331]
 </pre></div>
 </div>
 </div>
@@ -543,7 +550,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.6369432938652189 1.6369432938652224
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.7585672607097393 1.7585672607097358
 </pre></div>
 </div>
 </div>
@@ -574,7 +581,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d0ecafcee79b7a7f8985e69c41e8b9ed7685df4174ba55df1abcd65da55dc06d.png" src="_images/d0ecafcee79b7a7f8985e69c41e8b9ed7685df4174ba55df1abcd65da55dc06d.png" />
+<img alt="_images/e9e04f0c1cf38f841a0ebc3886767f12f21f40ee82f7ee5eccd07f7ca8d7c968.png" src="_images/e9e04f0c1cf38f841a0ebc3886767f12f21f40ee82f7ee5eccd07f7ca8d7c968.png" />
 </div>
 </div>
 <p>В таком случае наш <strong>Maximum Margin Classifier</strong> работать не будет. Исходя из этого, мы можем прийти к выводу, что наш классификатор очень чувствителен к выбросам. Решение этой проблемы будет рассмотрено в следующем разделе.</p>
@@ -1054,18 +1061,18 @@ Sum = 1.00
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scores(Logits) 
- [[-1.79384571  3.93548404 -4.09798995]
- [ 1.33263674 -1.23076607 -0.56180703]] 
+ [[-0.50013109 -4.33510775 -9.40902288]
+ [-2.39717326  2.04758836 -0.85189342]] 
 
 Probs 
- [[2.96876232e-03 9.13674958e-01 2.96413718e-04]
- [6.76689601e-02 5.21336112e-03 1.01775449e-02]] 
+ [[6.82448242e-02 1.47421396e-03 9.22544187e-06]
+ [1.02375203e-02 8.72027580e-01 4.80066366e-02]] 
 
 Grads dL/dW 
- [[-9.32331040e-01 -8.63250422e-02  1.04739586e-02]
- [-2.13533792e+00  3.82734992e+00 -1.97622624e-02]
- [-3.00000000e+00  2.74102487e+00  8.89241153e-04]
- [-4.00000000e+00  3.65469983e+00  1.18565487e-03]]
+ [[-9.89762480e-01 -9.98525786e-01  4.80158620e-02]
+ [-2.02047504e+00  2.00294843e+00 -9.59948223e-02]
+ [-3.00000000e+00  4.42264187e-03  2.76763256e-05]
+ [-4.00000000e+00  5.89685583e-03  3.69017675e-05]]
 </pre></div>
 </div>
 </div>

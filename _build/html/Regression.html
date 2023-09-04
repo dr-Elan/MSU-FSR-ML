@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Stochastic Gradient Descent (SGD) &#8212; FSR. Machine learning.</title>
+    <title>Linear Model (LM) &#8212; FSR. Machine learning.</title>
   
   
   
@@ -159,7 +159,18 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Stochastic Gradient Descent (SGD)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Linear Model (LM)</a></li>
+
+
+
+
+
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="regression_seminar.html">SGD</a></li>
 
 
@@ -169,10 +180,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="KNN_seminar.html">KNN</a></li>
 <li class="toctree-l1"><a class="reference internal" href="decision_trees_seminar.html">DT</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mymarkdownfile.html">Here’s my sample title</a></li>
 </ul>
 
     </div>
@@ -356,7 +363,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Stochastic Gradient Descent (SGD)</h1>
+    <h1>Linear Model (LM)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -366,13 +373,45 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-ml">Искусственный интелект (AI) и машинное обучение (ML) системы, которые влияют на всех нас, большинство из нас пользуются ими каждый день. Они генерируют для нас ленту новостей, которые мы читаем, музыку, которую мы слушаем, помогают в принятии решение крупным компаниям и правительствам, что мы покупаем, смотрим и слушаем.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Линейная регрессия</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Метод максимального правдоподобия</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Linear Model (LM)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Метод максимального правдоподобия</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Дополнительные материалы:</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Обучение алгоритма/модели машинного обучения</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Линейные модели. Линейные регрессия</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Линейная регрессия</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#p-y-i-x-vec-w-sum-limits-j-1-m-w-j-x-ij-mathbf-n-0-sigma-2-mathbf-n-sum-limits-j-1-m-w-j-x-ij-sigma-2">$<span class="math notranslate nohighlight">\(p(y_i| X, \vec w = \sum\limits_{j=1}^{m}w_j X_{ij} + \mathbf N (0, \sigma^2) = \mathbf N ( \sum\limits_{j=1}^{m} w_j X_{ij}, \sigma^2 ) \)</span>$</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#log-p-vec-y-x-vec-w-frac-n-2-log-2-pi-sigma-2-frac-1-2-sigma-2-sum-limits-i-1-n-big-y-i-vec-w-t-vec-x-i-big-2">$<span class="math notranslate nohighlight">\( \log p ( \vec y | X, \vec w  ) = -\frac{n}{2} \log 2 \pi \sigma^2 - \frac{1}{2 \sigma^2} \sum\limits_{i=1}^{n} \big( y_i - \vec w ^{T} \vec x_i \big)^2 \)</span>$</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Функция потерь</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mathbf-l-x-vec-y-vec-w-frac-1-2-sigma-2-big-y-i-vec-w-t-vec-x-i-big-2">$<span class="math notranslate nohighlight">\( \mathbf L (X, \vec y, \vec w ) = \frac{1}{2\sigma^2} \big( y_i - \vec w^{T} \vec x_i \big)^2  .\)</span>$</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Виды регрессии</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">1. Полиномиальная</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-sum-limits-i-1-n-sum-limits-j-1-m-w-i-x-i-j-b">$<span class="math notranslate nohighlight">\( f(X) = \sum\limits_{i=1}^{n} \sum\limits_{j=1}^{m} w_i x_i^j + b \)</span>$</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2. Логорифмическая</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-sum-limits-i-1-n-w-i-ln-x-i-b">$<span class="math notranslate nohighlight">\( f(X) = \sum\limits_{i=1}^{n}  w_i \ln( x_i) + b \)</span>$</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">3. Экспоненциальная</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-sum-limits-i-1-n-e-w-i-x-i-b">$<span class="math notranslate nohighlight">\( f(X) = \sum\limits_{i=1}^{n} e^ {w_i x_i} + b \)</span>$</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">4.Гиперболическая</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-sum-limits-i-1-n-cdot-frac-1-x-b">$<span class="math notranslate nohighlight">\( f(X) = \sum\limits_{i=1}^{n} \cdot \frac{1}{x} + b \)</span>$</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Практика</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Полиномиальная регрессия</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13"><strong>Дополнительные материалы:</strong></a></li>
+</ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -383,50 +422,769 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="stochastic-gradient-descent-sgd">
-<h1>Stochastic Gradient Descent (SGD)<a class="headerlink" href="#stochastic-gradient-descent-sgd" title="Permalink to this heading">#</a></h1>
-<section id="ai-ml">
-<h2>Искусственный интелект (AI) и машинное обучение (ML) системы, которые влияют на всех нас, большинство из нас пользуются ими каждый день. Они генерируют для нас ленту новостей, которые мы читаем, музыку, которую мы слушаем, помогают в принятии решение крупным компаниям и правительствам, что мы покупаем, смотрим и слушаем.<a class="headerlink" href="#ai-ml" title="Permalink to this heading">#</a></h2>
-<p><strong>Машинное обучение — использование специальных алгоритмов самостоятельного нахождения решений различных задач путём комплексного использования статисческих данных, из которых выводятся закономерности и на основе которых делаются прогнозы.</strong></p>
-<p><strong>Процесс:</strong></p>
-<ol class="arabic simple">
-<li><p>Сбор и обработка данных</p></li>
-<li><p>Выбор алгоритма машинного обчения для поставленно задачи.</p></li>
-<li><p>Обучение алгоритма с проверкой качества работы</p></li>
-<li><p>Использование обученного алгоритма с контролем качества</p></li>
-</ol>
-<p style="align: center;"><img align=center src="https://sun9-3.userapi.com/impg/rMxsV1l3x_NgXZnO2BR_Z_vQ5CMfAysGMkpVrg/5vII3kSwywk.jpg?size=1233x403&quality=96&proxy=1&sign=607ece16ae211ad91d8c9a1ba285c822&type=album"  width=900></p>
-<div class="alert alert-info">
-    <h2>Некоторые важные определения</h2>
-<ul>
- <li><b>Классификация</b> - задача о разделении классов, по заданному набору признаков.</li>
- <li><b>Регрессия</b> - задача о предсказывании конкретного значения, но основе заданных параметров.</li>
- <li><b>Кластеризация</b>  - задача об объединении объектов в группы по каким-то уникальным общим свойствам/на основе каких-то закономерностях данных.</li>
-</ul>
-</div><h1><u>План лекциика</u></h1>
-<p><font size="3" face="Arial">
-<ul type="square"><li><a href="#1">Линейная регрессия.</a><ul><li><a href="#2">Метод максимального правдоподобия.</a><a href="#3"></p></section>
-<section id="id1">
-<h2>Линейная регрессия<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<p id="1">Сегодня мы детально обсудим очень важный класс моделей машинного обучения – линейных. На данный момент развития машинного обучения и искусственного интелекта в целом можно строить довольно сложные модели, нейросети, но практически везде в основе лежат линейные модели. Они имеют большое кол-во преимуществ, например, такие как относительная простота вычислений и интепретация результатов, эффективность для описания многих процессов. Линейные модели используются в прогнозе цен, построении вероятностных моделей в кредитном скоринге, трейдинге, и т.д. </p>
+  <section class="tex2jax_ignore mathjax_ignore" id="linear-model-lm">
+<h1>Linear Model (LM)<a class="headerlink" href="#linear-model-lm" title="Permalink to this heading">#</a></h1>
+<p>Важный класс моделей машинного обучения – линейных. <strong>Линейные модели</strong> –– предполагааюь, что опредеяемы критерий линейно зависит от признаков описывающих ообъект или процесс. На данный момент развития машинного обучения и искусственного интелекта в целом можно строить довольно сложные модели, нейросети, но практически везде в основе лежат линейные модели. Они имеют большое кол-во преимуществ, например, такие как относительная простота вычислений и интепретация результатов, эффективность для описания многих процессов. Линейные модели используются в прогнозе цен, построении вероятностных моделей в кредитном скоринге, трейдинге, и т.д.</p>
 <p>Линейные модели описываются довольно простым линейным уравнением, где <span class="math notranslate nohighlight">\(y\)</span> - целевая переменная, <span class="math notranslate nohighlight">\(w\)</span> - вектор весов модели, <span class="math notranslate nohighlight">\(X\)</span> - матрица наблюдений,  а <span class="math notranslate nohighlight">\(e\)</span> - ошибка.$<span class="math notranslate nohighlight">\(y_i = \sum\limits^{m}_{j=1}w_j X_{ij} + e_i\)</span>$</p>
-<p style="align: center;"><img align=center src="https://wiki.loginom.ru/images/linear-regression.svg"  width=900></p><section id="id2">
-<h3>Метод максимального правдоподобия<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<p style="align: center;"><img align=center src="https://wiki.loginom.ru/images/linear-regression.svg"  width=900></p><p><strong>Плюсы:</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1. Скорость и простота
+2. Интерпретируемость модели. Линейная модель являеся прозрачной и понятной для аналитика. По полученным коэффициентам регресси можно судить о том, как тот или иной факутор влияет на результат, сдалеть на это основе дополонительные поезные выводы.
+3. Широкая применимость. Большое количество реальных процессов в экономике и бизнесе можно с достаточной точностью описать линейными моделями.
+4. Изученность данного подхода. Для линейной регрессии известны типичные проблемы (например мультиколлинерность) и их решения, разработна и реализованы тесты оценки стиатической значимости получаемых моделей.
+</pre></div>
+</div>
+<p><strong>Минусы:</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1. Не могут отследить сложные зависимости в данных.
+2. Проблемы мультиколлинеарности.
+</pre></div>
+</div>
+<section id="id1">
+<h2>Метод максимального правдоподобия<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <p id="2">Если процесс описывается с помощью линеной модели, то необходимо определить параметры $\alpha$ модели, для максимально эффективной точности. На языке математики это означает, что нужно задать вероятность $$p(y|x,\alpha)$$ того, что модель с параметрами $\alpha$ и входными данными $x$ будет максимальной.</p>
 Введем функцию правдоподобия, от которой нужно потребовать, чтобы произведение вероятностей по всем возможным $x$ с параметрами $\alpha$ было максимально.
 $$W(\alpha) = \prod\limits_{i}p(x_i, \alpha)$$
 Тогда прологарифмировав выражение, получаем функцию масимального правдоподобия. $$L(\alpha) = \sum\limits_i \log p(x_i,\alpha)$$
 Чтобы максимизировать $L(\alpha)$ необходимо минимизировать среднеквадратичную ошибку между прогнозируемыми и фактическими значениями.
-Подробное док-во и доп. информацию, можно почитать <a href="https://habr.com/ru/company/ods/blog/323890/#metod-maksimalnogo-pravdopodobiya">здесь</a>.<div class="alert alert-info"><i>В каких случаях мы можем использовать линейную регресию? Какие данные мы можем использовать?</i>
-<p>Требования к данным.</p>
-<ol><li>Линейная зависимость целевой переменной</li><li>Нормальное распределение остатков</li><li>Постоянная изменчивость остатков. Гомоскедастиность.</li></ol>
-</div><ol><b><li><b>Линейная зависимость целевой переменной</b></li></b> Линейная модель не сможет описвать сложные кривые и нелинейные данные. Должно быть хотя бы подозрение на линейность модели.<p style="align: center;"><img align=center src="https://sun9-35.userapi.com/impg/hP4Ue_r14n4_zs8d0UKA7LpZx74vPQDJy9Igqg/ve5O14Ggors.jpg?size=885x305&quality=96&proxy=1&sign=de7b6f1424868593e0970a3887ea4660&type=album"  width=900></p>
-<b><li>Нормальное распределение остатков</li></b> Величины остатков, должны быть близки к нормальному распределению. Иначе, наша модель будет делать предсказание со смещением.<p style="align: center;"><img align=center src="https://sun9-7.userapi.com/impg/g-SaD6uQxQWVwJAXUC1RaH_NwOxIw0o0cpoD3Q/iMp5_Nqc82U.jpg?size=1207x400&quality=96&proxy=1&sign=865580edacb008724e7bc9d0c388a12d&type=album"  width=900></p><p style="align: center;"></p>
-<b><li>Постоянная изменчивость остатков. Гомоскедастиность.</li></b>Если у данных есть четко выраженная постоянная изменичивость остатков на каком-то отрезке и нет случайности нормального распределения, то такие данные не будут эффективно описаны линейной регрессией. Пример гетероскедастичной последовательности:<p style="align: center;"><img align=center src="https://sun9-63.userapi.com/impg/W0twTR05RqqKhI1XjSm0dbgca0xSN2EnYZuQWQ/b1vaIVmtPEc.jpg?size=1207x400&quality=96&proxy=1&sign=3d6565dcf115e6c67a440ba0b7a6294f&type=album"  width=900></p><p style="align: center;"><img align=center src="https://sun9-50.userapi.com/impg/cwkPmjSk4m7SuvcJ-Ak6M-uKKlduPMOpjq3xUQ/z84UDGD2-l0.jpg?size=1207x280&quality=96&proxy=1&sign=0bf8df49169982f351ad37df7a9c5bd8&type=album"  width=900></p></ol><h2>Summary</h2>
-<ol><li>Линейная регрессия лежит в основе многих сложных моделей, она позволяет очень эффективно предсказываать <b>общий тренд</b> данных, но также имеет и довольно <b>большие ограничения</b> на исследуемый датасет.</li><li>Полиномиальная регрессия умеет описывать <b>более сложные кривые</b> данных, которые не может описать линейная. <b>В зависимости от степени</b> полином будет описывать все точнее и точнее рассматриваемые данные, но не стоит забывать про <b>переобучение</b>.</li></ol></section>
+Подробное док-во и доп. информацию, можно почитать <a href="https://habr.com/ru/company/ods/blog/323890/#metod-maksimalnogo-pravdopodobiya">здесь</a>.
 </section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id2">
+<h1>Обучение алгоритма/модели машинного обучения<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h1>
+<p>Для обучения модели определяются:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1. Функция потерь.
+2. Технические метрики,с помощью которых определяют качесвто обучения модели.
+3. Бизнес метрики, с помощью которых поредеют бизнес эффект модели.
+</pre></div>
+</div>
+<p><strong>Функция потерь</strong> ––  это мера количества ошибок, которые наша модель делает на наборе данных.</p>
+<p>Функция потерь задает гипрповерхность в прострвен параметров модели (пространство функций потерь) Минимзурюя функцию потерь мы получаем модель, которая дает минимальное отклонение предсказанных данных от реальных.</p>
+<p>Ошибки, которые совершает модель:</p>
+<ol class="arabic simple">
+<li><p>Ошибки <strong>обучения</strong> (на тренироочных данных)</p></li>
+<li><p>Ошибки <strong>обобщения</strong> (на проверочных данных)</p></li>
+</ol>
 <section id="id3">
-<h2><strong>Дополнительные материалы:</strong><a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h2>Линейные модели. Линейные регрессия<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p><strong>Линейные модели</strong> –– предполагают, что опредеяляемы приктерий линейно зависит от признаков описывающих объект или процесс.</p>
+<p>Плюсы:</p>
+<ol class="arabic simple">
+<li><p>Скорость и простота получения модели.</p></li>
+<li><p>Интерпретируемость модели. Линейная модель явялеся прозрачной и понятно для ананлитика. По результатам, сделать на этой основе дополнительные полезны</p></li>
+<li><p>Широкая применимость. Большое количество реальных процессов экономике и бизнесе можно с достаточной точностью описывать линейными моделями.</p></li>
+<li><p>Изучаенность данного подхода. Для линейно регрессии известны типичнве пробелмы (напрмер, мультиколлинерарность) и их решения, разработаны и реализованный тесты оценки статической знакчимости получаемых моделей.</p></li>
+</ol>
+<p><strong>Минусы:</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1. Не могут уловаить сложные заисимости в даннхы. 
+2. Пробелмы с мультколлинеарностью.
+</pre></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id4">
+<h1>Линейная регрессия<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h1>
+<p>Регрессия –– уравнение связи искомого критерия с признаками.</p>
+<p>Линейна регрессия – связь между искомым критерием и параметрами линейная</p>
+<div class="math notranslate nohighlight">
+\[
+y_i = \sum\limits_{j=1}^{m} w_j X_{ij} + e_i
+\]</div>
+<p><span class="math notranslate nohighlight">\(Y\)</span> –– целевая переменная
+<span class="math notranslate nohighlight">\(W\)</span> –– вектор весов модели
+<span class="math notranslate nohighlight">\(X\)</span> –– матрица наблюдений
+<span class="math notranslate nohighlight">\(e\)</span> –– ошибка модели</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;_mpl-gallery&#39;</span><span class="p">)</span>
+
+<span class="c1"># Make data</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="c1"># R = np.sqrt(X + Y)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">X</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">Y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># Plot the surface</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;projection&quot;</span><span class="p">:</span> <span class="s2">&quot;3d&quot;</span><span class="p">})</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">Z</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">Blues</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xticklabels</span><span class="o">=</span><span class="p">[],</span>
+       <span class="n">yticklabels</span><span class="o">=</span><span class="p">[],</span>
+       <span class="n">zticklabels</span><span class="o">=</span><span class="p">[])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4622b9921bda41fc2897a893a42896a2f8af78d2bff764432797cf6ef1689006.png" src="_images/4622b9921bda41fc2897a893a42896a2f8af78d2bff764432797cf6ef1689006.png" />
+</div>
+</div>
+<p>При обучении мы должны минимизировать квадраты отклонения</p>
+<div class="math notranslate nohighlight">
+\[Q(w, X) = \frac{1}{l} ||Xw - y||^2 \to \min\]</div>
+<p>Идеальная модель</p>
+<div class="math notranslate nohighlight">
+\[y = f(\theta) + \epsilon\]</div>
+<div class="math notranslate nohighlight">
+\[\epsilon_i \sim \mathbf{ N}(0, \sigma^2) \]</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="p-y-i-x-vec-w-sum-limits-j-1-m-w-j-x-ij-mathbf-n-0-sigma-2-mathbf-n-sum-limits-j-1-m-w-j-x-ij-sigma-2">
+<h1>$<span class="math notranslate nohighlight">\(p(y_i| X, \vec w = \sum\limits_{j=1}^{m}w_j X_{ij} + \mathbf N (0, \sigma^2) = \mathbf N ( \sum\limits_{j=1}^{m} w_j X_{ij}, \sigma^2 ) \)</span>$<a class="headerlink" href="#p-y-i-x-vec-w-sum-limits-j-1-m-w-j-x-ij-mathbf-n-0-sigma-2-mathbf-n-sum-limits-j-1-m-w-j-x-ij-sigma-2" title="Permalink to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="log-p-vec-y-x-vec-w-frac-n-2-log-2-pi-sigma-2-frac-1-2-sigma-2-sum-limits-i-1-n-big-y-i-vec-w-t-vec-x-i-big-2">
+<h1>$<span class="math notranslate nohighlight">\( \log p ( \vec y | X, \vec w  ) = -\frac{n}{2} \log 2 \pi \sigma^2 - \frac{1}{2 \sigma^2} \sum\limits_{i=1}^{n} \big( y_i - \vec w ^{T} \vec x_i \big)^2 \)</span>$<a class="headerlink" href="#log-p-vec-y-x-vec-w-frac-n-2-log-2-pi-sigma-2-frac-1-2-sigma-2-sum-limits-i-1-n-big-y-i-vec-w-t-vec-x-i-big-2" title="Permalink to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id5">
+<h1>Функция потерь<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="mathbf-l-x-vec-y-vec-w-frac-1-2-sigma-2-big-y-i-vec-w-t-vec-x-i-big-2">
+<h1>$<span class="math notranslate nohighlight">\( \mathbf L (X, \vec y, \vec w ) = \frac{1}{2\sigma^2} \big( y_i - \vec w^{T} \vec x_i \big)^2  .\)</span>$<a class="headerlink" href="#mathbf-l-x-vec-y-vec-w-frac-1-2-sigma-2-big-y-i-vec-w-t-vec-x-i-big-2" title="Permalink to this heading">#</a></h1>
+<p>В каких случаях мы можем использовать линейную регресию? Какие данные мы можем использовать?</p>
+<p><strong>Требования к данным.</strong></p>
+<ol class="arabic simple">
+<li><p>Линейная зависимость целевой переменной</p></li>
+<li><p>Нормальное распределение остатков</p></li>
+<li><p>Постоянная изменчивость остатков. Гомоскедастиность.</p></li>
+<li><p>независимость признаков <span class="math notranslate nohighlight">\( corr(x_i, x_j)=0 \)</span></p></li>
+</ol>
+<ol><b><li><b>Линейная зависимость целевой переменной</b></li></b> Линейная модель не сможет описвать сложные кривые и нелинейные данные. Должно быть хотя бы подозрение на линейность модели.<p style="align: center;"><img align=center src="https://sun9-35.userapi.com/impg/hP4Ue_r14n4_zs8d0UKA7LpZx74vPQDJy9Igqg/ve5O14Ggors.jpg?size=885x305&quality=96&proxy=1&sign=de7b6f1424868593e0970a3887ea4660&type=album"  width=900></p>
+<b><li>Нормальное распределение остатков</li></b> Величины остатков, должны быть близки к нормальному распределению. Иначе, наша модель будет делать предсказание со смещением.<p style="align: center;"><img align=center src="https://sun9-7.userapi.com/impg/g-SaD6uQxQWVwJAXUC1RaH_NwOxIw0o0cpoD3Q/iMp5_Nqc82U.jpg?size=1207x400&quality=96&proxy=1&sign=865580edacb008724e7bc9d0c388a12d&type=album"  width=900></p><p style="align: center;"></p>
+<b><li>Постоянная изменчивость остатков. Гомоскедастиность.</li></b>Если у данных есть четко выраженная постоянная изменичивость остатков на каком-то отрезке и нет случайности нормального распределения, то такие данные не будут эффективно описаны линейной регрессией. Пример гетероскедастичной последовательности:<p style="align: center;"><img align=center src="https://sun9-63.userapi.com/impg/W0twTR05RqqKhI1XjSm0dbgca0xSN2EnYZuQWQ/b1vaIVmtPEc.jpg?size=1207x400&quality=96&proxy=1&sign=3d6565dcf115e6c67a440ba0b7a6294f&type=album"  width=900></p><p style="align: center;"><img align=center src="https://sun9-50.userapi.com/impg/cwkPmjSk4m7SuvcJ-Ak6M-uKKlduPMOpjq3xUQ/z84UDGD2-l0.jpg?size=1207x280&quality=96&proxy=1&sign=0bf8df49169982f351ad37df7a9c5bd8&type=album"  width=900></p></ol><section id="id6">
+<h2>Виды регрессии<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<section id="id7">
+<h3>1. Полиномиальная<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="f-x-sum-limits-i-1-n-sum-limits-j-1-m-w-i-x-i-j-b">
+<h1>$<span class="math notranslate nohighlight">\( f(X) = \sum\limits_{i=1}^{n} \sum\limits_{j=1}^{m} w_i x_i^j + b \)</span>$<a class="headerlink" href="#f-x-sum-limits-i-1-n-sum-limits-j-1-m-w-i-x-i-j-b" title="Permalink to this heading">#</a></h1>
+<section id="id8">
+<h2>2. Логорифмическая<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="f-x-sum-limits-i-1-n-w-i-ln-x-i-b">
+<h1>$<span class="math notranslate nohighlight">\( f(X) = \sum\limits_{i=1}^{n}  w_i \ln( x_i) + b \)</span>$<a class="headerlink" href="#f-x-sum-limits-i-1-n-w-i-ln-x-i-b" title="Permalink to this heading">#</a></h1>
+<section id="id9">
+<h2>3. Экспоненциальная<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="f-x-sum-limits-i-1-n-e-w-i-x-i-b">
+<h1>$<span class="math notranslate nohighlight">\( f(X) = \sum\limits_{i=1}^{n} e^ {w_i x_i} + b \)</span>$<a class="headerlink" href="#f-x-sum-limits-i-1-n-e-w-i-x-i-b" title="Permalink to this heading">#</a></h1>
+<section id="id10">
+<h2>4.Гиперболическая<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="f-x-sum-limits-i-1-n-cdot-frac-1-x-b">
+<h1>$<span class="math notranslate nohighlight">\( f(X) = \sum\limits_{i=1}^{n} \cdot \frac{1}{x} + b \)</span>$<a class="headerlink" href="#f-x-sum-limits-i-1-n-cdot-frac-1-x-b" title="Permalink to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id11">
+<h1>Практика<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> <span class="c1"># табличные данные</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>  <span class="c1"># визулизация</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="c1"># Библиотека для работы с линейной регрессией</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span> <span class="c1"># линейная регрессия</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="c1"># stats models: regression fitting via matrices of regression design</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/Users/ruslanpepa/Documents/МГУ/MSU-FSR-ML/CarPrice/CarPrice_Assignment.csv&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>car_ID</th>
+      <th>symboling</th>
+      <th>CarName</th>
+      <th>fueltype</th>
+      <th>aspiration</th>
+      <th>doornumber</th>
+      <th>carbody</th>
+      <th>drivewheel</th>
+      <th>enginelocation</th>
+      <th>wheelbase</th>
+      <th>...</th>
+      <th>enginesize</th>
+      <th>fuelsystem</th>
+      <th>boreratio</th>
+      <th>stroke</th>
+      <th>compressionratio</th>
+      <th>horsepower</th>
+      <th>peakrpm</th>
+      <th>citympg</th>
+      <th>highwaympg</th>
+      <th>price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>3</td>
+      <td>alfa-romero giulia</td>
+      <td>gas</td>
+      <td>std</td>
+      <td>two</td>
+      <td>convertible</td>
+      <td>rwd</td>
+      <td>front</td>
+      <td>88.6</td>
+      <td>...</td>
+      <td>130</td>
+      <td>mpfi</td>
+      <td>3.47</td>
+      <td>2.68</td>
+      <td>9.0</td>
+      <td>111</td>
+      <td>5000</td>
+      <td>21</td>
+      <td>27</td>
+      <td>13495.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>3</td>
+      <td>alfa-romero stelvio</td>
+      <td>gas</td>
+      <td>std</td>
+      <td>two</td>
+      <td>convertible</td>
+      <td>rwd</td>
+      <td>front</td>
+      <td>88.6</td>
+      <td>...</td>
+      <td>130</td>
+      <td>mpfi</td>
+      <td>3.47</td>
+      <td>2.68</td>
+      <td>9.0</td>
+      <td>111</td>
+      <td>5000</td>
+      <td>21</td>
+      <td>27</td>
+      <td>16500.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1</td>
+      <td>alfa-romero Quadrifoglio</td>
+      <td>gas</td>
+      <td>std</td>
+      <td>two</td>
+      <td>hatchback</td>
+      <td>rwd</td>
+      <td>front</td>
+      <td>94.5</td>
+      <td>...</td>
+      <td>152</td>
+      <td>mpfi</td>
+      <td>2.68</td>
+      <td>3.47</td>
+      <td>9.0</td>
+      <td>154</td>
+      <td>5000</td>
+      <td>19</td>
+      <td>26</td>
+      <td>16500.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>2</td>
+      <td>audi 100 ls</td>
+      <td>gas</td>
+      <td>std</td>
+      <td>four</td>
+      <td>sedan</td>
+      <td>fwd</td>
+      <td>front</td>
+      <td>99.8</td>
+      <td>...</td>
+      <td>109</td>
+      <td>mpfi</td>
+      <td>3.19</td>
+      <td>3.40</td>
+      <td>10.0</td>
+      <td>102</td>
+      <td>5500</td>
+      <td>24</td>
+      <td>30</td>
+      <td>13950.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>2</td>
+      <td>audi 100ls</td>
+      <td>gas</td>
+      <td>std</td>
+      <td>four</td>
+      <td>sedan</td>
+      <td>4wd</td>
+      <td>front</td>
+      <td>99.4</td>
+      <td>...</td>
+      <td>136</td>
+      <td>mpfi</td>
+      <td>3.19</td>
+      <td>3.40</td>
+      <td>8.0</td>
+      <td>115</td>
+      <td>5500</td>
+      <td>18</td>
+      <td>22</td>
+      <td>17450.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 26 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 205 entries, 0 to 204
+Data columns (total 26 columns):
+ #   Column            Non-Null Count  Dtype  
+---  ------            --------------  -----  
+ 0   car_ID            205 non-null    int64  
+ 1   symboling         205 non-null    int64  
+ 2   CarName           205 non-null    object 
+ 3   fueltype          205 non-null    object 
+ 4   aspiration        205 non-null    object 
+ 5   doornumber        205 non-null    object 
+ 6   carbody           205 non-null    object 
+ 7   drivewheel        205 non-null    object 
+ 8   enginelocation    205 non-null    object 
+ 9   wheelbase         205 non-null    float64
+ 10  carlength         205 non-null    float64
+ 11  carwidth          205 non-null    float64
+ 12  carheight         205 non-null    float64
+ 13  curbweight        205 non-null    int64  
+ 14  enginetype        205 non-null    object 
+ 15  cylindernumber    205 non-null    object 
+ 16  enginesize        205 non-null    int64  
+ 17  fuelsystem        205 non-null    object 
+ 18  boreratio         205 non-null    float64
+ 19  stroke            205 non-null    float64
+ 20  compressionratio  205 non-null    float64
+ 21  horsepower        205 non-null    int64  
+ 22  peakrpm           205 non-null    int64  
+ 23  citympg           205 non-null    int64  
+ 24  highwaympg        205 non-null    int64  
+ 25  price             205 non-null    float64
+dtypes: float64(8), int64(8), object(10)
+memory usage: 41.8+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(205, 26)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s1">&#39;horsepower&#39;</span><span class="p">]]</span> <span class="c1"># пробег</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span> <span class="c1"># метод фит - метод обучения модели</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LinearRegression()
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span>
+<span class="n">model</span><span class="o">.</span><span class="n">intercept_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-3721.76149432276
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_predict</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]]</span>
+<span class="n">Y</span><span class="o">.</span><span class="n">head</span><span class="p">()</span> <span class="c1"># предсказываемая цена</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>13495.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>16500.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>16500.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>13950.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>17450.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;horsepower&#39;</span><span class="p">,</span> <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;C1&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;horsepower&#39;, ylabel=&#39;price&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/661870483e8beb0b93771cc03ee7abb2072036eb12aa3381133cd0f589f5a736.png" src="_images/661870483e8beb0b93771cc03ee7abb2072036eb12aa3381133cd0f589f5a736.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># будем использовать набор данных, а не только пробег</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;doornumber&#39;</span><span class="p">,</span> <span class="s1">&#39;fueltype&#39;</span><span class="p">,</span> <span class="s2">&quot;drivewheel&quot;</span><span class="p">]])</span>
+<span class="n">X</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>doornumber_four</th>
+      <th>doornumber_two</th>
+      <th>fueltype_diesel</th>
+      <th>fueltype_gas</th>
+      <th>drivewheel_4wd</th>
+      <th>drivewheel_fwd</th>
+      <th>drivewheel_rwd</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>200</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>201</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>202</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>203</th>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>204</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]]</span>
+<span class="n">Y</span><span class="o">.</span><span class="n">head</span><span class="p">()</span> <span class="c1"># предсказываемая цена</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>13495.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>16500.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>16500.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>13950.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>17450.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="n">y_predict</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="c1"># обучаем регрессию</span>
+<span class="n">y_predict</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[19249.60301532],
+       [19249.60301532],
+       [19249.60301532],
+       [ 9706.15712532],
+       [11347.82007674]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[  585.80342267,  -585.80342267,   207.22744852,  -207.22744852,
+        -2477.2422775 , -4118.90522892,  6596.14750642]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Y</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Y</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y_predict</span><span class="p">,</span> <span class="s1">&#39;y^&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># видим как цена действительно накладывается на истину</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f1c4f96c43fbc75c2ec952d60e4c9fa53bc861a03447838d3e1864b12cf3bdb8.png" src="_images/f1c4f96c43fbc75c2ec952d60e4c9fa53bc861a03447838d3e1864b12cf3bdb8.png" />
+</div>
+</div>
+<section id="id12">
+<h2>Полиномиальная регрессия<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
+<p id="4">Не всегда данные могут быть описаны (достаточно эффективно) линейной моделью. В некоторых задачах часто строятся полиномиальные модели. Здесь появляется дополнительный гиперпараметр - максимальная степень, в  которой могут находится параметры для описанния данных. Хороший пример как работает полиномиальная и линейная регрессия на нелинейных данных<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span> <span class="c1"># подгружаем метрику mse и r2</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span> 
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span>
+
+<span class="c1"># считаем метрику MSE и R2</span>
+<span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;RMSE:&#39;</span><span class="p">,</span> <span class="n">rmse</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;R2:&#39;</span><span class="p">,</span> <span class="n">r2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE: 6088.0029296591265
+R2: 0.41641433979764864
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 1200x900 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;horsepower&#39;</span><span class="p">,</span> <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;C1&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;horsepower&#39;, ylabel=&#39;price&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/ffe26be0e03a4e9c9ba4a5e97fe7e3a61eec12174baff660d59ff6e9c1e6bbef.png" src="_images/ffe26be0e03a4e9c9ba4a5e97fe7e3a61eec12174baff660d59ff6e9c1e6bbef.png" />
+</div>
+</div>
+<h2>Summary</h2>
+<ol><li>Линейная регрессия лежит в основе многих сложных моделей, она позволяет очень эффективно предсказываать <b>общий тренд</b> данных, но также имеет и довольно <b>большие ограничения</b> на исследуемый датасет.</li><li>Полиномиальная регрессия умеет описывать <b>более сложные кривые</b> данных, которые не может описать линейная. <b>В зависимости от степени</b> полином будет описывать все точнее и точнее рассматриваемые данные, но не стоит забывать про <b>переобучение</b>.</li></ol></section>
+<section id="id13">
+<h2><strong>Дополнительные материалы:</strong><a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Виды машинных обучений. Обучение с учителем, без и с подкреплением <a class="reference external" href="https://youtu.be/ku2oPMPht2I">https://youtu.be/ku2oPMPht2I</a></p></li>
 <li><p>Устройство проекта в машинном обучении <a class="reference external" href="https://youtu.be/LXc6gjip_oM">https://youtu.be/LXc6gjip_oM</a></p></li>
@@ -506,13 +1264,45 @@ $$W(\alpha) = \prod\limits_{i}p(x_i, \alpha)$$
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-ml">Искусственный интелект (AI) и машинное обучение (ML) системы, которые влияют на всех нас, большинство из нас пользуются ими каждый день. Они генерируют для нас ленту новостей, которые мы читаем, музыку, которую мы слушаем, помогают в принятии решение крупным компаниям и правительствам, что мы покупаем, смотрим и слушаем.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Линейная регрессия</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Метод максимального правдоподобия</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Linear Model (LM)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Метод максимального правдоподобия</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Дополнительные материалы:</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Обучение алгоритма/модели машинного обучения</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Линейные модели. Линейные регрессия</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Линейная регрессия</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#p-y-i-x-vec-w-sum-limits-j-1-m-w-j-x-ij-mathbf-n-0-sigma-2-mathbf-n-sum-limits-j-1-m-w-j-x-ij-sigma-2">$<span class="math notranslate nohighlight">\(p(y_i| X, \vec w = \sum\limits_{j=1}^{m}w_j X_{ij} + \mathbf N (0, \sigma^2) = \mathbf N ( \sum\limits_{j=1}^{m} w_j X_{ij}, \sigma^2 ) \)</span>$</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#log-p-vec-y-x-vec-w-frac-n-2-log-2-pi-sigma-2-frac-1-2-sigma-2-sum-limits-i-1-n-big-y-i-vec-w-t-vec-x-i-big-2">$<span class="math notranslate nohighlight">\( \log p ( \vec y | X, \vec w  ) = -\frac{n}{2} \log 2 \pi \sigma^2 - \frac{1}{2 \sigma^2} \sum\limits_{i=1}^{n} \big( y_i - \vec w ^{T} \vec x_i \big)^2 \)</span>$</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Функция потерь</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mathbf-l-x-vec-y-vec-w-frac-1-2-sigma-2-big-y-i-vec-w-t-vec-x-i-big-2">$<span class="math notranslate nohighlight">\( \mathbf L (X, \vec y, \vec w ) = \frac{1}{2\sigma^2} \big( y_i - \vec w^{T} \vec x_i \big)^2  .\)</span>$</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Виды регрессии</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">1. Полиномиальная</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-sum-limits-i-1-n-sum-limits-j-1-m-w-i-x-i-j-b">$<span class="math notranslate nohighlight">\( f(X) = \sum\limits_{i=1}^{n} \sum\limits_{j=1}^{m} w_i x_i^j + b \)</span>$</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2. Логорифмическая</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-sum-limits-i-1-n-w-i-ln-x-i-b">$<span class="math notranslate nohighlight">\( f(X) = \sum\limits_{i=1}^{n}  w_i \ln( x_i) + b \)</span>$</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">3. Экспоненциальная</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-sum-limits-i-1-n-e-w-i-x-i-b">$<span class="math notranslate nohighlight">\( f(X) = \sum\limits_{i=1}^{n} e^ {w_i x_i} + b \)</span>$</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">4.Гиперболическая</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-sum-limits-i-1-n-cdot-frac-1-x-b">$<span class="math notranslate nohighlight">\( f(X) = \sum\limits_{i=1}^{n} \cdot \frac{1}{x} + b \)</span>$</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Практика</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Полиномиальная регрессия</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13"><strong>Дополнительные материалы:</strong></a></li>
+</ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>
