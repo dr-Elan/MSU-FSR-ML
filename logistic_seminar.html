@@ -1,0 +1,1215 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Log-Reg &#8212; FSR. Machine learning.</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'logistic_seminar';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="SVM" href="SVM_seminar.html" />
+    <link rel="prev" title="SGD" href="regression_seminar.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/FSRlogo.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/FSRlogo.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Машинное обучение
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Regression.html">Stochastic Gradient Descent (SGD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regression_seminar.html">SGD</a></li>
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Log-Reg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SVM_seminar.html">SVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KNN_seminar.html">KNN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decision_trees_seminar.html">DT</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mymarkdownfile.html">Here’s my sample title</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Flogistic_seminar.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/logistic_seminar.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Log-Reg</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d">1D классификация</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2D классификация</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3D классификация</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Геометрическая интерпретация</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Единообразный подход к учету смещения</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hard-margin-classifier">Линейный классификатор с пороговой функций принятия решения. Hard Margin Classifier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hinge-loss-soft-margin-classifier">Линейный классификатор с Hinge loss. Soft Margin Classifier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mse-loss">MSE-loss</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Кросс-энтропия как общая функция потерь для задач классификации</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Переход к вероятностям</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#softmax">Практическое вычисление SoftMax</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Градиент функции потерь. Кросс-энтропия</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="log-reg">
+<h1>Log-Reg<a class="headerlink" href="#log-reg" title="Permalink to this heading">#</a></h1>
+<section id="d">
+<h2>1D классификация<a class="headerlink" href="#d" title="Permalink to this heading">#</a></h2>
+<p>Рассмотрим одномерный пример. У нас есть данные по массе мышей. Часть из них определена как мыши с нормальной массой тела, а часть — как мыши с ожирением. Чтобы их отделить друг от друга, нам достаточно одного критерия. Мы можем посмотреть на график и визуально определить предельную массу, после которой мышки будут жирненькими.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span><span class="n">total_len</span><span class="o">=</span><span class="mi">40</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="n">total_len</span> <span class="o">//</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="n">total_len</span> <span class="o">//</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">total_len</span> <span class="o">//</span> <span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">total_len</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+
+<span class="k">def</span> <span class="nf">plot_data</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">total_len</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">hue</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">threshold</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">threshold</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">margin</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">margin</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;pink&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
+    <span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Normal&quot;</span><span class="p">,</span> <span class="s2">&quot;Obese&quot;</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Mass, g&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ax</span>
+
+
+<span class="n">total_len</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="n">total_len</span><span class="o">=</span><span class="n">total_len</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plot_data</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">21.5</span><span class="p">,</span> <span class="n">total_len</span><span class="o">=</span><span class="n">total_len</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b45df0dab72f40c58d30f921222dc8b211ff311e19b7c0cdc2ee5fa43c48c8fd.png" src="_images/b45df0dab72f40c58d30f921222dc8b211ff311e19b7c0cdc2ee5fa43c48c8fd.png" />
+</div>
+</div>
+<p>Теперь, пользуясь нашим простым критерием, попробуем классифицировать каких-то новых мышей.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">classify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">21.5</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span><span class="p">[</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">y</span>
+
+
+<span class="n">total_len</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mf">21.5</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="n">total_len</span><span class="o">=</span><span class="n">total_len</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plot_data</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span> <span class="n">total_len</span><span class="o">=</span><span class="n">total_len</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plot_data</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">classify</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">threshold</span><span class="p">),</span> <span class="n">total_len</span><span class="o">=</span><span class="n">total_len</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/443a8b0e39a27e013eec0e1db7216f442b4e2a50df7a9735f80810d5da28d39e.png" src="_images/443a8b0e39a27e013eec0e1db7216f442b4e2a50df7a9735f80810d5da28d39e.png" />
+</div>
+</div>
+<p>Но что если наши мыши находятся тут?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">21.45</span><span class="p">,</span> <span class="mf">22.5</span><span class="p">])</span>
+
+<span class="n">total_len</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="n">total_len</span><span class="o">=</span><span class="n">total_len</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plot_data</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">total_len</span><span class="o">=</span><span class="n">total_len</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plot_data</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">classify</span><span class="p">(</span><span class="n">x_test</span><span class="p">),</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">21.5</span><span class="p">,</span> <span class="n">total_len</span><span class="o">=</span><span class="n">total_len</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/859efce94a252526d405157b0407b5e2a6f895d4b80bcb926fe79769fbb424e7.png" src="_images/859efce94a252526d405157b0407b5e2a6f895d4b80bcb926fe79769fbb424e7.png" />
+</div>
+</div>
+<p>С точки зрения нашего классификатора, все просто: больше порогового значения — толстые мыши, меньше — нормальные. Но, с точки зрения здравого смысла, логичнее было бы классифицировать обоих мышей как нормальных, так как они значительно ближе к нормальным, чем к ожиревшим.</p>
+<p>Вооружившись этим новым знанием, попробуем классифицировать наших отъевшихся мышек по-умному. Возьмем крайние точки в каждом кластере. И в качестве порогового значения будем использовать среднее между ними.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="n">total_len</span><span class="o">=</span><span class="n">total_len</span><span class="p">)</span>
+<span class="n">normal_limit</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>  <span class="c1"># extreme point for &#39;normal&#39;</span>
+<span class="n">obese_limit</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>  <span class="c1"># extreme point for &#39;obese&#39;</span>
+
+<span class="n">threshold</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">normal_limit</span><span class="p">,</span> <span class="n">obese_limit</span><span class="p">])</span>  <span class="c1"># separated with mean value</span>
+
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">21.5</span><span class="p">,</span> <span class="mi">23</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plot_data</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">total_len</span><span class="o">=</span><span class="n">total_len</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="p">[</span><span class="n">normal_limit</span><span class="p">,</span> <span class="n">obese_limit</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plot_data</span><span class="p">(</span>
+    <span class="n">x_test</span><span class="p">,</span>
+    <span class="n">classify</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">),</span>
+    <span class="n">total_len</span><span class="o">=</span><span class="n">total_len</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+    <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/fcce30cbafd8cff598ef5c3d396b0331048719c92e2211d67f2c6517cfa912bf.png" src="_images/fcce30cbafd8cff598ef5c3d396b0331048719c92e2211d67f2c6517cfa912bf.png" />
+</div>
+</div>
+<p>Мы можем посчитать, насколько наша мышь близка к тому, чтобы оказаться в другом классе. Такое расстояние называется <strong>margin</strong>. И оно считается как <span class="math notranslate nohighlight">\(\mathrm{margin} = |\mathrm{threshold} - \mathrm{observation}|\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">margins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x_test</span> <span class="o">-</span> <span class="n">threshold</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">margins</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.90685619 0.59314381]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Соответственно, если мы посчитаем margins для наших крайних точек <code class="docutils literal notranslate"><span class="pre">normal_limit</span></code> и <code class="docutils literal notranslate"><span class="pre">obese_limit</span></code>, мы найдем самое большое возможное значение margin для нашего классификатора</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">margin_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">normal_limit</span> <span class="o">-</span> <span class="n">threshold</span><span class="p">)</span>
+<span class="n">margin_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">obese_limit</span> <span class="o">-</span> <span class="n">threshold</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">margin_0</span><span class="p">,</span> <span class="n">margin_1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.6369432938652189 1.6369432938652224
+</pre></div>
+</div>
+</div>
+</div>
+<p>Такой классификатор мы называем <strong>Maximum Margin Classifier</strong>. Он хорошо работает в случае, когда все данные размечены аккуратно. Теперь рассмотрим более реалистичный пример, где что-то пошло не так.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_realistic_data</span><span class="p">(</span><span class="n">total_len</span><span class="o">=</span><span class="mi">40</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="n">total_len</span> <span class="o">//</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="n">total_len</span> <span class="o">//</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">total_len</span> <span class="o">//</span> <span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">total_len</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)])</span>
+    <span class="n">indx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">x</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">y</span><span class="p">[</span><span class="n">indx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="mi">50</span>
+    <span class="n">s</span><span class="p">[</span><span class="n">indx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">300</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span>
+
+
+<span class="n">total_len</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">generate_realistic_data</span><span class="p">(</span><span class="n">total_len</span><span class="o">=</span><span class="n">total_len</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plot_data</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">total_len</span><span class="o">=</span><span class="n">total_len</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d0ecafcee79b7a7f8985e69c41e8b9ed7685df4174ba55df1abcd65da55dc06d.png" src="_images/d0ecafcee79b7a7f8985e69c41e8b9ed7685df4174ba55df1abcd65da55dc06d.png" />
+</div>
+</div>
+<p>В таком случае наш <strong>Maximum Margin Classifier</strong> работать не будет. Исходя из этого, мы можем прийти к выводу, что наш классификатор очень чувствителен к выбросам. Решение этой проблемы будет рассмотрено в следующем разделе.</p>
+</section>
+<section id="id1">
+<h2>2D классификация<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>Теперь рассмотрим пример, где мы измерили не только вес мышей, но и их длину от хвоста до носа. Мы можем применить метод Support Vector Classifier, и теперь классы разделяет не одно пороговое значение (по сути, точка), а линия.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_blobs</span>
+
+
+<span class="k">def</span> <span class="nf">generate_2d_data</span><span class="p">(</span><span class="n">total_len</span><span class="o">=</span><span class="mi">40</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="n">total_len</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">10</span>
+    <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">20</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+
+<span class="k">def</span> <span class="nf">plot_data</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">total_len</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">21.5</span><span class="p">):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">hue</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Normal&quot;</span><span class="p">,</span> <span class="s2">&quot;Obese&quot;</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Mass, g&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Length, cm&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ax</span>
+
+
+<span class="n">total_len</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">generate_2d_data</span><span class="p">(</span><span class="n">total_len</span><span class="o">=</span><span class="n">total_len</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plot_data</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">total_len</span><span class="o">=</span><span class="n">total_len</span><span class="p">)</span>
+
+<span class="c1"># Code for illustration, later we will understand how it works</span>
+<span class="c1"># fit the model, don&#39;t regularize for illustration purposes</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># plot the decision function</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">xlim</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()</span>
+<span class="n">ylim</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()</span>
+
+<span class="c1"># create grid to evaluate model</span>
+<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xlim</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xlim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">30</span><span class="p">)</span>
+<span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">ylim</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ylim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">30</span><span class="p">)</span>
+<span class="n">YY</span><span class="p">,</span> <span class="n">XX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">yy</span><span class="p">,</span> <span class="n">xx</span><span class="p">)</span>
+<span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">XX</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">YY</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span><span class="o">.</span><span class="n">T</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">xy</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">XX</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># plot decision boundary and margins</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span>
+    <span class="n">XX</span><span class="p">,</span> <span class="n">YY</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="c1"># plot support vectors</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">clf</span><span class="o">.</span><span class="n">support_vectors_</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="n">clf</span><span class="o">.</span><span class="n">support_vectors_</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">facecolors</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+    <span class="n">edgecolors</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/628b708e903c7531d7bd08e45d0db2fbad507acdddeea9e34c174b1d8ae27c9e.png" src="_images/628b708e903c7531d7bd08e45d0db2fbad507acdddeea9e34c174b1d8ae27c9e.png" />
+</div>
+</div>
+</section>
+<section id="id2">
+<h2>3D классификация<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>Если мы добавим еще одно измерение — возраст, мы обнаружим, что наши данные стали трехмерными, а разделяет их теперь не линия, а плоскость.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_3d_data</span><span class="p">(</span><span class="n">total_len</span><span class="o">=</span><span class="mi">40</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="n">total_len</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">10</span>
+    <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">20</span>
+    <span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">10</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+
+<span class="k">def</span> <span class="nf">plot_data</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">total_len</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">21.5</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xs</span><span class="o">=</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">ys</span><span class="o">=</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">zs</span><span class="o">=</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Set1&quot;</span><span class="p">)</span>
+    <span class="c1"># plot the decision function</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">xlim</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()</span>
+    <span class="n">ylim</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()</span>
+
+    <span class="c1"># create grid to evaluate model</span>
+    <span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xlim</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xlim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">30</span><span class="p">)</span>
+    <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">ylim</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ylim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">30</span><span class="p">)</span>
+    <span class="n">YY</span><span class="p">,</span> <span class="n">XX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">yy</span><span class="p">,</span> <span class="n">xx</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">XX</span><span class="p">,</span> <span class="n">YY</span><span class="p">,</span> <span class="n">XX</span> <span class="o">*</span> <span class="n">YY</span> <span class="o">*</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Normal&quot;</span><span class="p">,</span> <span class="s2">&quot;Obese&quot;</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Mass, g&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Length, cm&quot;</span><span class="p">,</span> <span class="n">zlabel</span><span class="o">=</span><span class="s2">&quot;Age, days&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ax</span>
+
+
+<span class="n">total_len</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">generate_3d_data</span><span class="p">(</span><span class="n">total_len</span><span class="o">=</span><span class="n">total_len</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plot_data</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">total_len</span><span class="o">=</span><span class="n">total_len</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8129d9cfaf03303d6f43ad8ee388864d901c7bab341f85afd145300afedfd9fd.png" src="_images/8129d9cfaf03303d6f43ad8ee388864d901c7bab341f85afd145300afedfd9fd.png" />
+</div>
+</div>
+<p>Соответственно, если бы у нас было 4 измерения и больше (например: вес, длина, возраст, кровяное давление), то многомерная плоскость, которая бы разделяла наши классы, называлась бы <strong>гиперплоскость</strong> (рисовать мы ее, конечно же, не будем). Чисто технически, и точка, и линия — тоже гиперплоскости. Но все же гиперплоскостью принято называть то, что нельзя нарисовать на бумаге.</p>
+</section>
+<section id="id3">
+<h2>Геометрическая интерпретация<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>Теперь, когда мы разобрались с тем, что такое регрессия, вернемся к задаче классификации изображений из датасета CIFAR-10. Как можно применить регрессию для классификации?</p>
+<p>Предположим, у нас есть только 2 класса. Как можно использовать регрессию для того, чтобы определить относится ли изображение к классу 0 или к классу 1? В упрощенном варианте задача будет состоять в том, чтобы провести разделяющую плоскость (прямую) между 2-мя классами. Например, мы можем провести прямую через 0.</p>
+<p>Такая прямая будет задана направляющим вектором <span class="math notranslate nohighlight">\(\vec W\)</span>, число компонентов которого будет равно размерности пространства признаков. Уравнение гиперплоскоскости в этом случае имеет вид</p>
+<div class="math notranslate nohighlight">
+\[\large \sum_i W_i \cdot x_i = 0\]</div>
+<p>или, что эквивалентно:
+$<span class="math notranslate nohighlight">\(\large ( \vec W , \vec x) = 0\)</span>$</p>
+<img src ="https://edunet.kea.su/repo/EduNet-content/L02/out/regression_for_classification_imgs.png" width="270">
+<p>Рассмотрим другую ситуацию. В этом случае мы не можем просто провести прямую через 0, но можем отступить от 0 на какое-то расстояние и провести ее там. Вспомним, что уравнение прямой это <span class="math notranslate nohighlight">\(y=wx+b\)</span>, где <span class="math notranslate nohighlight">\(b\)</span> — это смещение (<em>bias</em>). Соответственно, если b != 0, то прямая через 0 проходить не будет, а будет проходить через значение b.</p>
+<img src ="https://edunet.kea.su/repo/EduNet-content/L02/out/regression_for_classification_add_bias.png" width="270"><p>Таким образом, для классификации объектов на два класса нам нужно подобрать значение вектора <span class="math notranslate nohighlight">\(W\)</span> и величину смещения <span class="math notranslate nohighlight">\(B\)</span>. Вместе они зададут гиперплоскость вида:
+$<span class="math notranslate nohighlight">\(\large ( \vec W , \vec x) - B = 0\)</span>$</p>
+<p><a class="reference external" href="http://vision.stanford.edu/teaching/cs231n-demos/linear-classify/">Linear Classification Loss Visualization
+</a></p>
+<p>Если у нас есть несколько классов, мы можем для каждого из них посчитать уравнение <span class="math notranslate nohighlight">\(y_{i} = w_{i}x_{i}+b_{i}\)</span>.</p>
+<img src ="https://edunet.kea.su/repo/EduNet-content/L02/out/regression_for_classification_add_bias_add_multiclasses.jpg" width="400">
+<p>На картинке нас интересуют 3 класса. Соответственно, мы можем записать систему линейных уравнений:</p>
+<p>\begin{cases}
+y_{0} = w_{0}x_{0} + b_{0} \
+y_{1} = w_{1}x_{1} + b_{1} \
+y_{2} = w_{2}x_{2} + b_{2} \
+\end{cases}</p>
+</section>
+<section id="id4">
+<h2>Единообразный подход к учету смещения<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>Мы их можем собрать в матрицу, тогда получится следующее:</p>
+<img src ="https://edunet.kea.su/repo/EduNet-content/L02/out/scalar_product_add_bias.png" width="750"><p>У нас есть матрица коэффициентов, которые мы каким-то образом подобрали, пока ещё непонятно как. Есть вектор <span class="math notranslate nohighlight">\(x\)</span>, соответствующий изображению.</p>
+<p>Мы умножаем вектор на матрицу, получаем нашу гиперплоскость для четырехмерного пространства в данном случае. Чтобы оно не лежало в 0, мы должны добавить смещение. И мы можем сделать это после, но можно взять и этот вектор смещения (вектор <strong>b</strong>) просто приписать к матрице <strong>W</strong>.</p>
+<p>Что будет выходом такой конструкции? Мы умножили матрицу весов на наш вектор, соответствующий изображению, получили некоторый отклик. По этому отклику мы так же, как и при реализации метода ближайшего соседа можем судить: если он больше остальных, то мы предполагаем, что это кошка.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">56</span><span class="p">,</span> <span class="mi">231</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">w_cat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Image &quot;</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Weights &quot;</span><span class="p">,</span> <span class="n">w_cat</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;img * w_cat &quot;</span><span class="p">,</span> <span class="n">img</span> <span class="o">*</span> <span class="n">w_cat</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;sum &quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">img</span> <span class="o">*</span> <span class="n">w_cat</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Add bias &quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">img</span> <span class="o">*</span> <span class="n">w_cat</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="mf">1.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Image  [ 56 231  24   2]
+Weights  [ 0.2 -0.5  0.1  2. ]
+img * w_cat  [  11.2 -115.5    2.4    4. ]
+sum  -97.89999999999999
+Add bias  -96.8
+</pre></div>
+</div>
+</div>
+</div>
+<img src ="https://edunet.kea.su/repo/EduNet-content/L02/out/img_to_function_get_scores.png" width="600"><p>Обозначим входное изображение как <span class="math notranslate nohighlight">\(x\)</span>, а шаблон для первого из классов как <span class="math notranslate nohighlight">\(w_0\)</span>.</p>
+<p>Элементы пронумеруем подряд 1,2,3 … <span class="math notranslate nohighlight">\(n\)</span>. То есть развернем матрицу пикселей изображения в вектор.</p>
+<p>Тогда результат сравнения изображения с этим шаблоном будет вычисляться по формуле: <span class="math notranslate nohighlight">\(x[0]*w_0[0] + x[1]*w_0[1] + … x[n-1]*w_0[n-1]\)</span></p>
+<p><strong>Предварительная обработка</strong></p>
+<img src ="https://edunet.kea.su/repo/EduNet-content/L02/out/img_to_vector_to_compute_scalar_product.png" width="700"><img src ="https://edunet.kea.su/repo/EduNet-content/L02/out/scalar_product_ways_to_use.png" width="800"><p>Эта простая модель лежит в основе практически всех сложных моделей, которые мы будем рассматривать дальше. Внутри будем также пользоваться скалярным произведением.</p>
+<p>В дальнейшем мы будем проходить сверточные сети, они работают очень похоже:
+мы тоже накладываем шаблон на некоторую матрицу и перемножаем элементы, затем складываем. Единственное отличие — обычно ядро свертки меньше, чем размер самого изображения.</p>
+<p>Собирая все вместе, получаем какое-то компактное представление, что у нас есть некоторая функция, на вход которой мы подаем изображение, и у нее есть параметры (веса). Пока происходит просто умножение вектора на матрицу, в дальнейшем это может быть что-то более сложное, функция будет представлять какую-то более сложную модель. А на выходе (для классификатора) мы получаем числа, которые интерпретируют уверенность модели в том, что изображение принадлежит к определенному классу.</p>
+<img src ="https://edunet.kea.su/repo/EduNet-content/L02/out/input_img_scalar_product_add_bias_get_scores.png" width="450"><p>Соответственно, эти коэффициенты, которые являются весами модели, надо каким-то образом подбирать. Но прежде чем подбирать коэффициенты, давайте определимся со следующим: как мы будем понимать, что модель работает хорошо или плохо? Вывод модели представляет собой просто некоторый набор чисел. Но как эти числа следует правильно интерпретировать? Рассмотрим этот вопрос в следующем разделе.</p>
+</section>
+<section id="hard-margin-classifier">
+<h2>Линейный классификатор с пороговой функций принятия решения. Hard Margin Classifier<a class="headerlink" href="#hard-margin-classifier" title="Permalink to this heading">#</a></h2>
+<p>Рассмотрим пример задачи классификации на два класса. У нас имеется:</p>
+<ol class="arabic simple">
+<li><p>Набор данных из <span class="math notranslate nohighlight">\(N\)</span> наблюдений.</p></li>
+<li><p>Для каждого из наблюдений нам известно признаковое описание объекта в виде набора вещественных чисел. То есть объекту под номером <span class="math notranslate nohighlight">\(i\)</span> соответствует вектор <span class="math notranslate nohighlight">\(\vec x_i\)</span>.</p></li>
+<li><p>Также для каждого наблюдения нам известна истинная метка класса. Мы знаем что объекту с признаковым описанием <span class="math notranslate nohighlight">\(\vec x_i\)</span> соответствует метка класса <span class="math notranslate nohighlight">\(y_i\)</span>. Будем считать, что метки классов принимают значения <span class="math notranslate nohighlight">\(y_i \in \pm 1\)</span>.</p></li>
+</ol>
+<p>Мы хотим подобрать такие <span class="math notranslate nohighlight">\(\vec W\)</span> и <span class="math notranslate nohighlight">\(B\)</span>, чтобы можно было провести такие гиперплоскости:</p>
+<div class="math notranslate nohighlight">
+\[\large (\vec W \vec x) - B  = 1\]</div>
+<p><strong>“Лежащие на этой плоскости и выше объекты относятся к классу <span class="math notranslate nohighlight">\(+1\)</span>”</strong></p>
+<div class="math notranslate nohighlight">
+\[\large (\vec W \vec x) - B  = -1\]</div>
+<p><strong>“Лежащие на этой плоскости и ниже объекты относятся к классу <span class="math notranslate nohighlight">\(-1\)</span>”</strong></p>
+<p>Расстояние между двумя этими <strong>жесткими</strong> границами задаётся просто длиной вектора <span class="math notranslate nohighlight">\(\vec W\)</span> и равно <span class="math notranslate nohighlight">\(\frac{2}{||\vec W||}\)</span></p>
+<p>Условие того, что объекты лежат <span class="math notranslate nohighlight">\((\vec x_i, y_i)\)</span> лежат по правильную сторону от разделяющих поверхностей можно записать в совместно:</p>
+<p>$<span class="math notranslate nohighlight">\(\large y_i ((\vec W, \vec x_i) - B )\ge 1,\)</span><span class="math notranslate nohighlight">\( которое должно выполняться для всех объектов \)</span>1 \le i \le N$.</p>
+<p>Среди всех решений <span class="math notranslate nohighlight">\(\vec W\)</span> и <span class="math notranslate nohighlight">\(B\)</span>, которые удовлетворяют условию выше, мы хотим подобрать такое, при котором пороговые разделяющие поверхности будут находится дальше всего. Так как расстояние между ними равно <span class="math notranslate nohighlight">\(\frac{2}{||\vec W||}\)</span>, мы приходим к следующей задаче на условный экстремум:</p>
+<div class="math notranslate nohighlight">
+\[\large ||\vec W|| \rightarrow \min, \; y_i ((\vec W, \vec x_i) - B )\ge 1\]</div>
+<p>Подобная задача на условный экстремум может быть решена при помощи <a class="reference external" href="https://en.wikipedia.org/wiki/Lagrange_multiplier">метода множителей Лагранжа</a>:</p>
+<p>Найти <span class="math notranslate nohighlight">\(\alpha_i\)</span>, <span class="math notranslate nohighlight">\(\vec W\)</span> и <span class="math notranslate nohighlight">\(B\)</span>, которые реализуют минимум функции потерь:</p>
+<div class="math notranslate nohighlight">
+\[\large L =  (\vec W, \vec W) + \sum_i \alpha_i (y_i ((\vec W, \vec x_i) - B )\]</div>
+</section>
+<section id="hinge-loss-soft-margin-classifier">
+<h2>Линейный классификатор с Hinge loss. Soft Margin Classifier<a class="headerlink" href="#hinge-loss-soft-margin-classifier" title="Permalink to this heading">#</a></h2>
+<p>Мы можем модифицировать функцию потерь на одном примере, разрешив классификатору ошибаться и упорядочивать некоторые объекты по “неправильную” сторону от разделяющих поверхностей.
+Данная модификация называется <a class="reference external" href="https://en.wikipedia.org/wiki/Hinge_loss">Hinge_loss</a>:
+$<span class="math notranslate nohighlight">\(\large L_i = \max(0, 1 - y_i ((\vec W, \vec x_i) - B ))\)</span>$</p>
+<p>Давайте рассмотрим, как линейная модель классификации с Hinge loss работает на практике. Мы можем применить линейный классификатор в том числе и к изображениям — достаточно просто вытянуть изображение из тензора формата <span class="math notranslate nohighlight">\((\text{C}, \text{H}, \text{W})\)</span> в <span class="math notranslate nohighlight">\((\text{C} \cdot \text{H} \cdot \text{W})\)</span>-мерный вектор. Применим линейный классификатор к нескольким изображениям из датасета CIFAR-10:</p>
+<img src ="https://edunet.kea.su/repo/EduNet-content/L02/out/model_predicted_scores_for_10_classes.png" width="550"><p>По аналогии с тем, что мы уже делали, мы можем сравнивать отклик на ключевой класс  (про который нам известно, что он на изображении, так как у нас есть метка этого класса) с остальными. Соответственно, мы подали изображение кошки и получили на выход вектор. Чем больше значение, тем больше вероятность того, что, по мнению модели, на изображении этот класс. Для кошки в данном случае это значение 2.9. Хорошо это или плохо? Нельзя сказать, пока мы не проанализировали остальную часть вектора. Если бы мы могли посмотреть на все значения в векторе, мы бы увидели, что есть значения больше, то есть в данном случае модель считает, что это собака, а не кошка, потому что для собаки значение максимально.</p>
+<p>На основании этого можно построить некоторую оценку. Давайте смотреть на разницу правильного класса с неправильными. Насколько уверенность в кошке будет больше остальных, настолько хорошо работает наша модель.</p>
+<p>Но поскольку нам важна не работа модели на конкретном изображении, а важно оценить ее работу в целом, то эту операцию нужно проделать либо для всего датасета, либо для некоторой выборки, которую мы подаем на вход и подсчитываем средний показатель. Этот показатель (насколько хорошо работает модель), называется функцией потерь, или <strong>loss function</strong>. Называется она так потому, что она показывает не то, насколько хорошо работает модель, а то, насколько плохо.</p>
+<p>Дальше будет понятно, почему так удобнее (разница только в знаке). Как это посчитать для всего датасета?</p>
+<p>Мы каким-то образом считаем loss для конкретного изображения, потом усредняем по всем изображениям.</p>
+<p>Дано: 3 учебных примера, 3 класса. При некотором W баллы f (a, W) = Wx равны:</p>
+<img src ="https://edunet.kea.su/repo/EduNet-content/L02/out/model_predicted_scores_for_3_classes.png" width="450"><p>Функция потерь показывает, насколько хорош наш текущий классификатор.</p>
+<p>Дан датасет примеров:</p>
+<p><span class="math notranslate nohighlight">\(\begin{Bmatrix} (x_i,y_i)  \end{Bmatrix}_{i=1}^N 	\)</span></p>
+<p>Где <strong><span class="math notranslate nohighlight">\(x_i\)</span></strong> — изображение, <strong><span class="math notranslate nohighlight">\(y_i\)</span></strong> — метка (число).</p>
+<p>Потери по набору данных — это среднее значение потерь для примеров:</p>
+<p><span class="math notranslate nohighlight">\( L = {1 \over N}\sum_iL_i(f(x_i,W),y_i)\)</span></p>
+<p>Построим функцию потерь для одного примера <span class="math notranslate nohighlight">\(L_i(f(x_i,W),y_i)\)</span>:</p>
+<ol class="arabic simple">
+<li><p>Вычислим вектор значений прогнозов классификатора <span class="math notranslate nohighlight">\(s = f(x_i, W)\)</span>.</p></li>
+<li><p>Для всех примеров рассмотрим разницу между оценкой на истинной категории и всеми оценками классификатора для неправильных категорий: <span class="math notranslate nohighlight">\(s_{y_i} - s_j\)</span> для <span class="math notranslate nohighlight">\(j \neq y_i\)</span>.</p></li>
+<li><p>Если получившаяся разница положительная и превышает некоторое пороговое значение («зазор»), которое мы установим равным <span class="math notranslate nohighlight">\(1\)</span>, то будем считать, что категория <span class="math notranslate nohighlight">\(j\)</span> не мешает модели верно классифицировать входной объект, припишем категории <span class="math notranslate nohighlight">\(j\)</span> нулевой вклад в <span class="math notranslate nohighlight">\(L_i(f(x_i,W),y_i)\)</span>.</p></li>
+<li><p>Если получившаяся разница не превосходит установленного нами единичного «зазора», то мы будем считать что ответ классификатора <span class="math notranslate nohighlight">\(s_j\)</span> в категории <span class="math notranslate nohighlight">\(j\)</span> мешает верной классификации входного объекта. В этом случае припишем для категории <span class="math notranslate nohighlight">\(j\)</span> аддитивный вклад в <span class="math notranslate nohighlight">\(L_i(f(x_i,W),y_i)\)</span> равный <span class="math notranslate nohighlight">\(s_j-s_{y_i}+1\)</span>.</p></li>
+</ol>
+<p>Описанную процедуру гораздо проще записать в виде формулы:</p>
+<p><span class="math notranslate nohighlight">\(L_i = \sum_{j\neq y_i}\begin{cases}
+  0,  &amp; \mbox{если } s_{y_i}\geq s_j+1\mbox{} \\
+  s_j-s_{y_i}+1, &amp; \mbox{если наоборот, то} \mbox{}
+\end{cases}\)</span></p>
+<p><span class="math notranslate nohighlight">\(=\sum_{j\neq y_i}max(0,s_j-s_{y_i}+1)\)</span></p>
+<p>Логика такая: если у нас уверенность модели в правильном классе большая, то модель работает хорошо и loss для данного конкретного примера должен быть равен нулю. Если есть класс, в котором модель уверена больше, чем в правильном, то loss должен быть не равен нулю, а отображать какую-то разницу, поскольку модель сильно ошиблась. При этом есть ещё одно соображение: что будет, если на выходе у правильного и ошибочного класса будут примерно равные веса? То есть, например, у кошки было бы 3.2, а у машины не 5.2, а 3.1. В этом случае ошибки нет, но понятно, что при небольшом изменении в данных (просто шум) скорее всего она появится.</p>
+<p>То есть модель плохо отличает эти классы. Поэтому мы и вводили некоторый зазор, который должен быть между правильным и неправильным ответом.</p>
+<p>Посмотрим на изображение снизу. У нас есть два класса: фиолетовые треугольники и синие квадраты, разделенные зазором. Также можем увидеть желтые треугольники и квадраты — это ошибочно распознанные классы.</p>
+<img src ="https://edunet.kea.su/repo/EduNet-content/L02/out/svm_decision_boundary.png" width="300"><p>И тоже учитывать его в loss function: сравнивать его результат для правильного класса не с чистым выходом для другого, а добавить к нему некоторую дельту (в данном случае — 1(единица)). Смотрим: если разница больше 0, то модель работает хорошо и <span class="math notranslate nohighlight">\(L_i = 0\)</span>. Если нет, то мы возвращаем эту разницу, и loss будет складываться из этих индивидуальных разниц.</p>
+<p><span class="math notranslate nohighlight">\(L_i = \sum_{j\neq y_i}\begin{cases}
+  0,  &amp; \mbox{если } s_{y_i}\geq s_j+1\mbox{} \\
+  s_j-s_{y_i}+1, &amp; \mbox{если наоборот, то} \mbox{}
+\end{cases}\)</span></p>
+<p><span class="math notranslate nohighlight">\(=\sum_{j\neq y_i}max(0,s_j-s_{y_i}+1)\)</span></p>
+<p>Ниже пример того, как считается loss.</p>
+<p>Считаем функцию потерь для 1-ого изображения:</p>
+<div class="math notranslate nohighlight">
+\[\large L_i = \sum_{j \neq y_i} \max(0, s_j-s_{y_i} +1)\]</div>
+<img src ="https://edunet.kea.su/repo/EduNet-content/L02/out/compute_loss_use_model_scores_for_1_example.png" width="300">
+<p><span class="math notranslate nohighlight">\(L_i = \max(0, 5.1-3.2+1) + \max(0, -1.7-3.2+1) = \max(0, 2.9) + \max(0, -3.9) = 2.9+0 = 2.9\)</span></p>
+<p>Также считаем потери для второго и третьего изображений:</p>
+<img src ="https://edunet.kea.su/repo/EduNet-content/L02/out/compute_loss_use_model_scores_for_2.png" width="300">
+<p><span class="math notranslate nohighlight">\(L_i = \max(0, 1.3-4.9+1) + \max(0, 2.0-4.9+1) = \max(0, -2.6) + \max(0, -1.9) = 0+0 = 0\)</span></p>
+<img src ="https://edunet.kea.su/repo/EduNet-content/L02/out/compute_loss_use_model_scores_for_3.png" width="300">
+<p><span class="math notranslate nohighlight">\(L_i = \max(0, 2.2-(-3.1)+1) + \max(0, 2.5-(-3.1)+1) = \max(0, 6.3) + \max(0, 6.6) = 6.3+6.6 = 12.9\)</span></p>
+<p>Значения потерь получились следующие:</p>
+<p><font color=2BA8E0 size=6><pre>Потери: 2.9   0   12.9</pre></font></p>
+<p>Считаем среднее значение loss для всего датасета:</p>
+<p><span class="math notranslate nohighlight">\( L = {1 \over N}\sum_{i=1}^N L_i\)</span></p>
+<p><span class="math notranslate nohighlight">\(L={2.9 + 0 + 12.9 \over 3} = 5.27\)</span></p>
+<p>SVM loss</p>
+<p><span class="math notranslate nohighlight">\(L_i=\sum_{j\neq y_i}\max(0,s_j-s_{y_i}+1)\)</span></p>
+<section id="mse-loss">
+<h3>MSE-loss<a class="headerlink" href="#mse-loss" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[MSE = \frac 1 N \sum_i(y_i - \hat{y_i})^2 \]</div>
+<p><span class="math notranslate nohighlight">\(y_i\)</span>, <span class="math notranslate nohighlight">\(\hat{y_i}\)</span> — константы, не являются функциями друг от друга
+$<span class="math notranslate nohighlight">\(\hat{y} = wx_i + b \)</span>$</p>
+<div class="math notranslate nohighlight">
+\[\frac {\delta MSE} {\delta w} = \frac 1 N \sum \frac {\delta (y_i - \hat{y_i}) ^2} {\delta \hat{y_i}} \frac {\delta \hat{y_i}} {\delta w}\]</div>
+</section>
+</section>
+<section id="id5">
+<h2>Кросс-энтропия как общая функция потерь для задач классификации<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<section id="id6">
+<h3>Переход к вероятностям<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p><strong>Softmax</strong></p>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=KpKog-L9veg">Видео от StatQuest, которое объясняет Softmax</a></p>
+<img src ="https://edunet.kea.su/repo/EduNet-content/L02/out/scores_to_probability.png" width="750"><p>Перейти к вероятностям мы сможем, проведя с весами некоторые не очень сложные математические преобразования.</p>
+<p>На слайде выше показано, почему выходы модели часто называют <a class="reference external" href="https://en.wikipedia.org/wiki/Logit">logit’ами</a>. Если предположить, что у нас есть некая вероятность, от которой мы берем такую функцию (logit), то результат может принимать значение в любых вещественных числах. Мы можем считать, что выходы модели — это logit’ы.</p>
+<p>Например, мы могли бы просто взять индекс массива, в котором значение (logit) максимально. Предположим, что наша модель выдала следующие значения:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logits</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mf">5.1</span><span class="p">,</span>  <span class="c1"># cat</span>
+    <span class="mf">3.2</span><span class="p">,</span>  <span class="c1"># car</span>
+    <span class="o">-</span><span class="mf">1.7</span><span class="p">,</span>  <span class="c1"># frog</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Тогда, чтобы узнать какой класс наша сеть предсказала, мы могли бы просто взять <code class="docutils literal notranslate"><span class="pre">argmax</span></code> от наших <code class="docutils literal notranslate"><span class="pre">logits</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Predicted class = </span><span class="si">%i</span><span class="s2"> (Cat)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">logits</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted class = 0 (Cat)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Но от argmax нельзя посчитать градиент, так как производная от константы равна 0. Соответственно, если бы мы вставили производную от argmax в градиентный спуск, мы бы получили везде нули, и соответственно, наша модель бы вообще ничему не научилась</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/670d8df2e7f8a5bbe492e92f6f096973fb82b6336ad144a2a9a3b62663b3ac0f.png" src="_images/670d8df2e7f8a5bbe492e92f6f096973fb82b6336ad144a2a9a3b62663b3ac0f.png" />
+</div>
+</div>
+<p>А мы бы хотели получить не logit’ы, а настоящую вероятность на выходе модели. Да еще и таким образом, чтобы от наших вероятностей можно было посчитать градиент. Для этого мы можем применить к нашим логитам функцию <strong>Softmax</strong></p>
+<img src ="https://edunet.kea.su/repo/EduNet-content/L02/out/linear_classifier_softmax.png" width="600">
+<p>Функция SoftMax:</p>
+<p><span class="math notranslate nohighlight">\(s=f(x_i; W);\)</span></p>
+<p><span class="math notranslate nohighlight">\( \displaystyle P(Y=k|X=x_i) = \frac{e^{s_k}}{\sum_je^{s_j}}.\)</span></p>
+<ol class="arabic simple">
+<li><p>Отобразим наши logit’ы на значения <span class="math notranslate nohighlight">\([0, +∞)\)</span>.</p></li>
+</ol>
+<p>Для этого возведем экспоненту (число Эйлера 2.71828) в <strong>степень логита</strong>. В результате, мы получим вектор гарантированно неотрицательных чисел (положительное число, возведенное в степень, даже отрицательную, даст положительное значение).</p>
+<ol class="arabic simple" start="2">
+<li><p>Нормализуем.</p></li>
+</ol>
+<p>Чтобы  интерпретировать числа как вероятности, их сумма должна быть равна единице. Мы должны их нормализовать, то есть <strong>поделить на сумму</strong>.</p>
+<p>Это преобразование называется <strong>Softmax функцией</strong>. <strong>Получаются вероятности</strong>, то есть числа, которые можно интерпретировать, как вероятности.</p>
+<p><span class="math notranslate nohighlight">\(\large \displaystyle \text{Softmax}_\text{кошка} = \frac{e^{5.1}}{e^{5.1} + e^{3.2} + e^{-1.7}}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">softmax</span><span class="p">(</span><span class="n">logits</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logits</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logits</span><span class="p">))</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">softmax</span><span class="p">(</span><span class="n">logits</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sum = </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">softmax</span><span class="p">(</span><span class="n">logits</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.86904954 0.12998254 0.00096793]
+Sum = 1.00
+</pre></div>
+</div>
+</div>
+</div>
+<p>Можно обратить внимание, что Softmax никоим образом не поменял порядок значений. Самому большому logit’у соответствует самая большая вероятность, а самому маленькому, соответственно, самая маленькая.</p>
+<p>Посмотрим на графиках. Возьмем массив случайных логитов и применим к ним softmax</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rand_logits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> <span class="n">rand_logits</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Logits&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> <span class="n">softmax</span><span class="p">(</span><span class="n">rand_logits</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Softmax&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a07cc81acbc9373f0a9ad0613663ed4fc41410de09e63816390d51c628a6c658.png" src="_images/a07cc81acbc9373f0a9ad0613663ed4fc41410de09e63816390d51c628a6c658.png" />
+</div>
+</div>
+<section id="softmax">
+<h4>Практическое вычисление SoftMax<a class="headerlink" href="#softmax" title="Permalink to this heading">#</a></h4>
+<p>При вычислении экспоненты от выходов модели могут получиться очень большие числа в силу очень высокой скорости роста экспоненты. Этот факт необходимо учитывать, чтобы вычисления SoftMax были численно стабильны:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">simplefilter</span>
+
+<span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">RuntimeWarning</span><span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">123</span><span class="p">,</span> <span class="mi">456</span><span class="p">,</span> <span class="mi">789</span><span class="p">])</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[123 456 789] [ 0.  0. nan]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Чтобы регуляризовать вычисление, нам следует предварительно упростить возникающую в вычислении дробь. Для этого мы можем вычесть из каждого <span class="math notranslate nohighlight">\(s_i\)</span> положительную константу, чтобы уменьшить значения экспонент. В качестве константы можно выбрать максимальный элемент этого вектора, тогда у нас гарантированно не будет очень больших чисел, и такой способ будет работать более стабильно.</p>
+<div class="math notranslate nohighlight">
+\[M = \max_j s_{y_{j}}\]</div>
+<div class="math notranslate nohighlight">
+\[s^{new}_{y_{i}}  = s_{y_{i}} - M \]</div>
+<div class="math notranslate nohighlight">
+\[ \dfrac {e^{s^{new}_{y_{i}}}} {\sum_j e^{s^{new}_{y_{j}}}}  = \dfrac {e^{s_{y_{i}} - M }} {\sum_j e^{s_{y_{j}} - M }} = \dfrac {e^{s_{y_{i}}}e ^ {-M}} {\sum_j e^{s_{y_{j}}} e ^ {-M}} = \dfrac {e ^ {-M} e^{s_{y_{i}}}} {e ^ {-M} \sum_j e^{s_{y_{j}}} } = \dfrac { e^{s_{y_{i}}}} { \sum_j e^{s_{y_{j}}} }\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">123</span><span class="p">,</span> <span class="mi">456</span><span class="p">,</span> <span class="mi">789</span><span class="p">])</span>
+<span class="n">f</span> <span class="o">-=</span> <span class="n">f</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-666 -333    0] [5.75274406e-290 2.39848787e-145 1.00000000e+000]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id7">
+<h3>Градиент функции потерь. Кросс-энтропия<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<p><a class="reference external" href="https://wandb.ai/wandb_fc/russian/reports/---VmlldzoxNDI4NjAw#:~:text=%D0%A4%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%20%D0%BF%D0%BE%D1%82%D0%B5%D1%80%D1%8C%20%D0%BF%D0%B5%D1%80%D0%B5%D0%BA%D1%80%D0%B5%D1%81%D1%82%D0%BD%D0%BE%D0%B9%20%D1%8D%D0%BD%D1%82%D1%80%D0%BE%D0%BF%D0%B8%D0%B8%20%E2%80%93%20%D1%8D%D1%82%D0%BE,%2C%20%D0%B3%D0%B4%D0%B5%200%20%E2%80%93%20%D0%B8%D0%B4%D0%B5%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F%20%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C.">Cross Entropy Loss</a></p>
+<div class="math notranslate nohighlight">
+\[ -L = \sum_i y_i \log p_i = \sum_i y_i \log(\dfrac {e^{s_{y_i}}} {\sum_j e^{s_{y_j}}})\]</div>
+<div class="math notranslate nohighlight">
+\[s_{y_i} = w_i x\]</div>
+<div class="math notranslate nohighlight">
+\[ \dfrac {\partial L} {\partial w_i} = \dfrac {\partial L} {\partial s_{y_i}} \dfrac {\partial s_{y_i}} {\partial w_i} \]</div>
+<div class="math notranslate nohighlight">
+\[\dfrac {\partial s_{y_i}} {\partial w_i} = x\]</div>
+<p>Только один <span class="math notranslate nohighlight">\(y_k = 1\)</span></p>
+<div class="math notranslate nohighlight">
+\[ -L = y_k \log p_i = \log(\dfrac {e^{s_{y_i}}} {\sum_j e^{s_{y_j}}})\]</div>
+<p>i = k</p>
+<div class="math notranslate nohighlight">
+\[ -L = \log(\dfrac {e^{s_{y_i}}} {\sum_j e^{s_{y_j}}}) = \log e^{s_{y_i}} - \log  \sum_j e^{s_{y_j}}  = s_{y_i} - \log  \sum_j e^{s_{y_j}}\]</div>
+<div class="math notranslate nohighlight">
+\[\dfrac {\partial -L} {\partial s_{y_i}} = 1 - \dfrac 1 {\sum_j e^{s_{y_j}}} \cdot \dfrac {\partial {\sum_j e^{s_{y_j}}}} {\partial s_{y_i}} = 1 - \dfrac 1 {\sum_j e^{s_{y_i}}} \cdot \dfrac {\partial e^{s_{y_i}}} {\partial s_{y_i}} = 1 - \dfrac {e^{s_{y_i}}} {\sum_j e^{s_{y_j}}} = 1 - p_i\]</div>
+<div class="math notranslate nohighlight">
+\[\dfrac {\partial L} {\partial s_{y_j}} = p_i - 1 \]</div>
+<div class="math notranslate nohighlight">
+\[ \dfrac {\partial L_i} {\partial w_i}  = \dfrac {\partial L} {\partial s_{y_i}} \dfrac {\partial s_{y_i}} {\partial w_i} = (p_i - 1) x \]</div>
+<p>i != k</p>
+<div class="math notranslate nohighlight">
+\[ -L = \log(\dfrac {e^{s_{y_i}}} {\sum_j e^{s_{y_j}}}) = \log e^{s_{y_k}} - \log  \sum_j e^{s_{y_j}}  = s_{y_k} - \log  \sum_j e^{s_{y_j}}\]</div>
+<div class="math notranslate nohighlight">
+\[\dfrac {\partial -L} {\partial s_{y_i}} = - \dfrac 1 {\sum_j e^{s_{y_j}}} \cdot \dfrac {\partial {\sum_j e^{s_{y_j}}}} {\partial s_{y_i}} =  \dfrac 1 {\sum_j e^{s_{y_i}}} \cdot \dfrac {\partial e^{s_{y_i}}} {\partial s_{y_i}} = \dfrac {e^{s_{y_i}}} {\sum_j e^{s_{y_j}}} = - p_i\]</div>
+<div class="math notranslate nohighlight">
+\[\dfrac {\partial L} {\partial s_{y_j}} = p_i \]</div>
+<div class="math notranslate nohighlight">
+\[ \dfrac {\partial L_i} {\partial w_i}  = \dfrac {\partial L} {\partial s_{y_i}} \dfrac {\partial s_{y_i}} {\partial w_i} = p_i x \]</div>
+<p>В коде это будет выглядеть вот так:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Input batch of 2 vector with 4 elements</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="c1"># Weights</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>  <span class="c1"># 3 class</span>
+
+<span class="c1"># model output</span>
+<span class="n">logits</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Scores(Logits) </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">logits</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Probabilities</span>
+<span class="n">probs</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">logits</span><span class="p">)</span>  <span class="c1"># defined before</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Probs </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">probs</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Ground true classes</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Derivative</span>
+<span class="n">probs</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># substract one from true class prob</span>
+<span class="n">dW</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span>  <span class="c1"># dot product with input</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grads dL/dW </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">dW</span><span class="p">)</span>  <span class="c1"># have same shape as W</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scores(Logits) 
+ [[-1.79384571  3.93548404 -4.09798995]
+ [ 1.33263674 -1.23076607 -0.56180703]] 
+
+Probs 
+ [[2.96876232e-03 9.13674958e-01 2.96413718e-04]
+ [6.76689601e-02 5.21336112e-03 1.01775449e-02]] 
+
+Grads dL/dW 
+ [[-9.32331040e-01 -8.63250422e-02  1.04739586e-02]
+ [-2.13533792e+00  3.82734992e+00 -1.97622624e-02]
+ [-3.00000000e+00  2.74102487e+00  8.89241153e-04]
+ [-4.00000000e+00  3.65469983e+00  1.18565487e-03]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="regression_seminar.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">SGD</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="SVM_seminar.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">SVM</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d">1D классификация</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2D классификация</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3D классификация</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Геометрическая интерпретация</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Единообразный подход к учету смещения</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hard-margin-classifier">Линейный классификатор с пороговой функций принятия решения. Hard Margin Classifier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hinge-loss-soft-margin-classifier">Линейный классификатор с Hinge loss. Soft Margin Classifier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mse-loss">MSE-loss</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Кросс-энтропия как общая функция потерь для задач классификации</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Переход к вероятностям</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#softmax">Практическое вычисление SoftMax</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Градиент функции потерь. Кросс-энтропия</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Belyakcoff N., Pepa R.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

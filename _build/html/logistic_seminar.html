@@ -36,6 +36,17 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/vendor/fontawesome/6.1.2/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
@@ -53,6 +64,24 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/documentation_options.js"></script>
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/design-tabs.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/copybutton_funcs.js"></script>
+    <script src="_static/jquery-3.6.0.js"></script>
+    <script src="_static/sphinx-thebe.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore-1.13.1.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script src="_static/scripts/bootstrap.js"></script>
+    <script src="_static/scripts/pydata-sphinx-theme.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
@@ -452,7 +481,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a879ba37d8cfedd3339d344547adba2e9039939a75640cc7b29eb519755599bd.png" src="_images/a879ba37d8cfedd3339d344547adba2e9039939a75640cc7b29eb519755599bd.png" />
+<img alt="_images/a473a6d5ca5934d58b1ad950fc1ab7b334af0d2456a0642f92f9cd46d2fde8e0.png" src="_images/a473a6d5ca5934d58b1ad950fc1ab7b334af0d2456a0642f92f9cd46d2fde8e0.png" />
 </div>
 </div>
 <p>Теперь, пользуясь нашим простым критерием, попробуем классифицировать каких-то новых мышей.</p>
@@ -477,7 +506,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f8d4051769a209686ed89ac273563de0c4d2b2705456d5c72e238b96d81587c1.png" src="_images/f8d4051769a209686ed89ac273563de0c4d2b2705456d5c72e238b96d81587c1.png" />
+<img alt="_images/b18b42489ef7a58d3a428d38965e193016b15435ac2f185b060e166dcaa7acba.png" src="_images/b18b42489ef7a58d3a428d38965e193016b15435ac2f185b060e166dcaa7acba.png" />
 </div>
 </div>
 <p>Но что если наши мыши находятся тут?</p>
@@ -494,7 +523,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b5b71a0415f3ee8a650080d86f938cf49024345fa7d5996224537e56b14f158b.png" src="_images/b5b71a0415f3ee8a650080d86f938cf49024345fa7d5996224537e56b14f158b.png" />
+<img alt="_images/5e5e2d24fdad46b2db246a993d36bcb1811ae06974733d8859b0f4c4c91ca3fa.png" src="_images/5e5e2d24fdad46b2db246a993d36bcb1811ae06974733d8859b0f4c4c91ca3fa.png" />
 </div>
 </div>
 <p>С точки зрения нашего классификатора, все просто: больше порогового значения — толстые мыши, меньше — нормальные. Но, с точки зрения здравого смысла, логичнее было бы классифицировать обоих мышей как нормальных, так как они значительно ближе к нормальным, чем к ожиревшим.</p>
@@ -523,7 +552,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9393aac3f12d1c4d61764e3d50b89974666c9240d5d07f66eff399f086626f56.png" src="_images/9393aac3f12d1c4d61764e3d50b89974666c9240d5d07f66eff399f086626f56.png" />
+<img alt="_images/cdf0fd7f75fe1e2c040bb2e45f898599e4de5afe8048eab5b59ffbd8e0fa6353.png" src="_images/cdf0fd7f75fe1e2c040bb2e45f898599e4de5afe8048eab5b59ffbd8e0fa6353.png" />
 </div>
 </div>
 <p>Мы можем посчитать, насколько наша мышь близка к тому, чтобы оказаться в другом классе. Такое расстояние называется <strong>margin</strong>. И оно считается как <span class="math notranslate nohighlight">\(\mathrm{margin} = |\mathrm{threshold} - \mathrm{observation}|\)</span></p>
@@ -535,7 +564,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.24098669 0.25901331]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.91071972 0.58928028]
 </pre></div>
 </div>
 </div>
@@ -550,7 +579,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.7585672607097393 1.7585672607097358
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.7084280131005443 1.7084280131005443
 </pre></div>
 </div>
 </div>
@@ -581,7 +610,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e9e04f0c1cf38f841a0ebc3886767f12f21f40ee82f7ee5eccd07f7ca8d7c968.png" src="_images/e9e04f0c1cf38f841a0ebc3886767f12f21f40ee82f7ee5eccd07f7ca8d7c968.png" />
+<img alt="_images/defb93edad6ad844482511ecef358eb2ff81bda0858f4151e07b47a80c0ab954.png" src="_images/defb93edad6ad844482511ecef358eb2ff81bda0858f4151e07b47a80c0ab954.png" />
 </div>
 </div>
 <p>В таком случае наш <strong>Maximum Margin Classifier</strong> работать не будет. Исходя из этого, мы можем прийти к выводу, что наш классификатор очень чувствителен к выбросам. Решение этой проблемы будет рассмотрено в следующем разделе.</p>
@@ -1061,18 +1090,18 @@ Sum = 1.00
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scores(Logits) 
- [[-0.50013109 -4.33510775 -9.40902288]
- [-2.39717326  2.04758836 -0.85189342]] 
+ [[ 1.30249083 -3.67517116 -2.33367825]
+ [-3.36435455  2.74061378 -2.53408543]] 
 
 Probs 
- [[6.82448242e-02 1.47421396e-03 9.22544187e-06]
- [1.02375203e-02 8.72027580e-01 4.80066366e-02]] 
+ [[0.18950185 0.0013057  0.00499396]
+ [0.00178167 0.79832977 0.00408705]] 
 
 Grads dL/dW 
- [[-9.89762480e-01 -9.98525786e-01  4.80158620e-02]
- [-2.02047504e+00  2.00294843e+00 -9.59948223e-02]
- [-3.00000000e+00  4.42264187e-03  2.76763256e-05]
- [-4.00000000e+00  5.89685583e-03  3.69017675e-05]]
+ [[-9.98218326e-01 -9.98694303e-01  9.08100907e-03]
+ [-2.00356335e+00  2.00261139e+00  1.81383268e-03]
+ [-3.00000000e+00  3.91709031e-03  1.49818881e-02]
+ [-4.00000000e+00  5.22278708e-03  1.99758508e-02]]
 </pre></div>
 </div>
 </div>
