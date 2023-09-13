@@ -9,7 +9,7 @@
      - [лекция](Regression.ipynb)
      - [семинар](regression_seminar.ipynb)
 2. Логистическая регрессия MSE
-     - [лекция]
+     - [лекция](Lection2.ipynb)
      - [семинар](logistic_seminar.ipynb)
 3. Метод опорных векторов SVM
      - [лекция]
