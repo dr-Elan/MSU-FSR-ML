@@ -8,11 +8,11 @@
      - [ML](MLA.ipynb)
      - [лекция](Regression.ipynb)
      - [семинар](regression_seminar.ipynb)
-2. Логистическая регрессия MSE
+2. Логистическая регрессия, Метод опорных векторов.
      - [лекция](Lection2.ipynb)
      - [семинар](logistic_seminar.ipynb)
-3. Метод опорных векторов SVM
-     - [лекция]
+3. Метод градиентного спускa SGD.
+     - [лекция](GD_SGD.ipynb)
      - [семинар](SVM_seminar.ipynb)
 4. Метод k-средних KNN
      - [лекция]
